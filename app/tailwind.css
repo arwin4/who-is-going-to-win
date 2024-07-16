@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Noto Sans';
+    font-display: swap;
+    src: url(/fonts/NotoSans.ttf);
+  }
+}
