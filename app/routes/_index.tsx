@@ -16,19 +16,22 @@ export default function Index() {
       <main className="grid space-y-6 sm:grid-flow-col sm:space-x-6 sm:space-y-0">
         <a href="arwin.site">
           <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
-            <h2 className="text-xl">DecisionDeskHQ</h2>
-            <div className="text-2xl font-semibold">55%</div>
-            <div className="-skew-y-2 bg-red-500">Trump</div>
+            <h2 className="text-xl">DecisionDeskHQ / The Hill</h2>
+            <div className="text-2xl font-semibold">55 %</div>
+            <div className="-skew-y-2 bg-red-400">Trump</div>
           </div>
-        </a>{' '}
+        </a>
         <a href="arwin.site">
           <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
             <h2 className="text-xl">Nate Silver</h2>
-            <div className="text-2xl font-semibold opacity-50">paywalled</div>
-            <div className="opacity-0"></div>
+            <div className="text-2xl font-semibold opacity-50">?</div>
+            <div className="opacity-50">(paywalled)</div>
           </div>
         </a>
       </main>
+      <footer className="text-gray-600">
+        Updates every hour. Last update: [last-update]
+      </footer>
     </>
   );
 }

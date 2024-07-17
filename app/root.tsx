@@ -10,7 +10,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="m-0 flex min-h-screen flex-col place-items-center justify-around  bg-slate-300">
+      <body className="m-0 flex min-h-screen flex-col place-items-center justify-around bg-slate-300  text-gray-800">
         {children}
       </body>
     </html>
