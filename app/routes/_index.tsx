@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { mongodb } from '../db.server';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { formatDistanceToNow } from 'date-fns';
 
 export const meta: MetaFunction = () => {
   return [
@@ -114,8 +115,11 @@ export default function Index() {
   const forecasts = useLoaderData();
   console.log(forecasts);
 
-  // const lastUpdate =
-  //   (Date.now() - new Date(forecasts.lastScrapeTime)) / 60 / 60;
+  const lastUpdate = formatDistanceToNow(new Date(forecasts.lastScrapeTime));
+
+  const lastUpdateWasOverAnHourAgo =
+    Date.now() - new Date(forecasts.lastScrapeTime) > 3600000;
+  console.log(lastUpdateWasOverAnHourAgo);
 
   return (
     <>
@@ -143,7 +147,8 @@ export default function Index() {
         </a>
       </main>
       <footer className="text-gray-600">
-        {/* Updates every hour. Last update: {lastUpdate} */}
+        Last update: {lastUpdate} ago.
+        {lastUpdateWasOverAnHourAgo && ' Refresh for the latest data.'}
       </footer>
     </>
   );
