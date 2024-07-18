@@ -4,6 +4,7 @@ import { mongodb } from '../db.server';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { formatDistanceToNow } from 'date-fns';
+import determineResult from '~/scrapers/utils/determineResult';
 
 export const meta: MetaFunction = () => {
   return [
@@ -29,43 +30,16 @@ async function scrapeTheHill() {
     throw new Error('Could not find the prediction');
   }
 
-  const percentage = fullPredictionString
-    .match(/(\d+(\.\d+)?%)/g)
-    ?.at(0)
-    ?.replace('%', '');
+  return determineResult(fullPredictionString);
+}
 
-  if (!percentage) {
-    throw new Error('Could not find percentage in string');
-  }
-
-  // Determine outcome
-  // let outcome: 'democrat' | 'republican' | 'tie';
-  let outcome = '';
-
-  if (percentage === '50') {
-    outcome = 'tie';
-  } else if (
-    (fullPredictionString.includes('Trump') &&
-      fullPredictionString.includes('Biden')) ||
-    (!fullPredictionString.includes('Trump') &&
-      !fullPredictionString.includes('Biden'))
-  ) {
-    outcome = 'tie';
-  } else if (fullPredictionString.includes('Trump')) {
-    outcome = 'republican';
-  } else if (fullPredictionString.includes('Biden')) {
-    outcome = 'democrat';
-  }
-
-  console.log(outcome);
-  console.log(percentage);
-
-  console.log(fullPredictionString);
-
-  return {
-    outcome: outcome,
-    percentage: percentage,
-  };
+async function scrapeFiveThirtyEight() {
+  const response = await axios.get(
+    'https://projects.fivethirtyeight.com/2024-election-forecast/',
+  );
+  const html = response.data;
+  const $ = cheerio.load(html);
+  const targetElement = $('.rep .text-primary');
 }
 
 async function scrapeAndSave() {
@@ -160,7 +134,7 @@ export default function Index() {
       </main>
       <footer className="text-gray-600">
         Last update: {lastUpdate} ago
-        {lastUpdateWasOverAnHourAgo && ' Refresh for the latest data.'}
+        {lastUpdateWasOverAnHourAgo && '. Refresh for the latest data.'}
       </footer>
     </>
   );
