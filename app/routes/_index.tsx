@@ -121,6 +121,9 @@ export default function Index() {
     Date.now() - new Date(forecasts.lastScrapeTime) > 3600000;
   console.log(lastUpdateWasOverAnHourAgo);
 
+  const demColor = 'bg-blue-400';
+  const repColor = 'bg-red-400';
+
   return (
     <>
       <div className="grid border-yellow-400 p-4 text-center font-sans">
@@ -133,7 +136,9 @@ export default function Index() {
             <div className="text-2xl font-semibold">
               {forecasts.theHill.percentage}%
             </div>
-            <div className="-skew-y-2 bg-red-400">
+            <div
+              className={`-skew-y-2 ${forecasts.theHill.outcome === 'republican' ? repColor : demColor}`}
+            >
               {forecasts.theHill.outcome === 'republican' ? 'Trump' : 'Biden'}
             </div>
           </div>
