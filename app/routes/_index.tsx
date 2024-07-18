@@ -5,6 +5,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { formatDistanceToNow } from 'date-fns';
 import determineResult from '~/scrapers/utils/determineResult';
+import scrapeFiveThirtyEight from '~/scrapers/scrapeFiveThirtyEight';
 
 export const meta: MetaFunction = () => {
   return [
@@ -33,17 +34,9 @@ async function scrapeTheHill() {
   return determineResult(fullPredictionString);
 }
 
-async function scrapeFiveThirtyEight() {
-  const response = await axios.get(
-    'https://projects.fivethirtyeight.com/2024-election-forecast/',
-  );
-  const html = response.data;
-  const $ = cheerio.load(html);
-  const targetElement = $('.rep .text-primary');
-}
-
 async function scrapeAndSave() {
   const theHillResult = await scrapeTheHill();
+  const fiveThirtyEightResult = await scrapeFiveThirtyEight();
   console.log(theHillResult);
 
   const db = mongodb.db('db');
@@ -55,6 +48,15 @@ async function scrapeAndSave() {
       $set: {
         outcome: theHillResult.outcome,
         percentage: theHillResult.percentage,
+      },
+    },
+  );
+  await collection.findOneAndUpdate(
+    { id: 'fiveThirtyEight' },
+    {
+      $set: {
+        outcome: fiveThirtyEightResult.outcome,
+        percentage: fiveThirtyEightResult.percentage,
       },
     },
   );
@@ -82,10 +84,12 @@ export async function loader() {
 
   const theHill = await collection.findOne({ id: 'theHill' });
   const nateSilver = await collection.findOne({ id: 'nateSilver' });
+  const fiveThirtyEight = await collection.findOne({ id: 'fiveThirtyEight' });
 
   const forecasts = {
     theHill,
     nateSilver,
+    fiveThirtyEight,
   };
 
   return { forecasts, lastScrapeTime };
@@ -131,6 +135,7 @@ export default function Index() {
       <main className="grid space-y-6 sm:grid-flow-col sm:space-x-6 sm:space-y-0">
         <ForecastCard forecast={forecasts.theHill} />
         <ForecastCard forecast={forecasts.nateSilver} />
+        <ForecastCard forecast={forecasts.fiveThirtyEight} />
       </main>
       <footer className="text-gray-600">
         Last update: {lastUpdate} ago
