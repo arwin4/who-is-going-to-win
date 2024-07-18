@@ -1,8 +1,6 @@
 export default function determineResult(fullPredictionString) {
-  const percentage = fullPredictionString
-    .match(/(\d+(\.\d+)?%)/g)
-    ?.at(0)
-    ?.replace('%', '');
+  let percentage = fullPredictionString.match(/^[^\d]*(\d+)/)?.at(1);
+  console.log(percentage);
 
   if (!percentage) {
     throw new Error('Could not find percentage in string');
@@ -25,6 +23,15 @@ export default function determineResult(fullPredictionString) {
     outcome = 'republican';
   } else if (fullPredictionString.includes('Biden')) {
     outcome = 'democrat';
+  }
+
+  if (parseFloat(percentage) < 50) {
+    percentage = 100 - percentage;
+    if (outcome === 'republican') {
+      outcome = 'democrat';
+    } else if (outcome === 'democrat') {
+      outcome = 'republican';
+    }
   }
 
   console.log(outcome);
