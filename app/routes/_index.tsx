@@ -107,22 +107,47 @@ export async function loader() {
   }
 
   const theHill = await collection.findOne({ id: 'theHill' });
+  const nateSilver = await collection.findOne({ id: 'nateSilver' });
 
-  return { theHill, lastScrapeTime };
+  const forecasts = {
+    theHill,
+    nateSilver,
+  };
+
+  return { forecasts, lastScrapeTime };
+}
+
+function ForecastCard({ forecast }) {
+  const demColor = 'bg-blue-400';
+  const repColor = 'bg-red-400';
+
+  return (
+    <a href={forecast.url}>
+      <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
+        <h2 className="text-xl">{forecast.formattedName}</h2>
+        <div
+          className={`text-2xl font-semibold ${!forecast.percentage ? 'opacity-70' : ''}`}
+        >
+          {forecast.percentage ? `${forecast.percentage}%` : `(paywalled)`}
+        </div>
+        <div
+          className={`-skew-y-2 ${forecast.outcome === 'republican' ? repColor : demColor}`}
+        >
+          {forecast.outcome === 'republican' ? 'Trump' : 'Biden'}
+        </div>
+      </div>
+    </a>
+  );
 }
 
 export default function Index() {
-  const forecasts = useLoaderData();
-  console.log(forecasts);
+  const { forecasts, lastScrapeTime } = useLoaderData();
 
-  const lastUpdate = formatDistanceToNow(new Date(forecasts.lastScrapeTime));
+  const lastUpdate = formatDistanceToNow(new Date(lastScrapeTime));
 
   const lastUpdateWasOverAnHourAgo =
-    Date.now() - new Date(forecasts.lastScrapeTime) > 3600000;
+    Date.now() - new Date(lastScrapeTime) > 3600000;
   console.log(lastUpdateWasOverAnHourAgo);
-
-  const demColor = 'bg-blue-400';
-  const repColor = 'bg-red-400';
 
   return (
     <>
@@ -130,29 +155,11 @@ export default function Index() {
         <h1 className="text-3xl">Presidential forecast aggregator</h1>
       </div>
       <main className="grid space-y-6 sm:grid-flow-col sm:space-x-6 sm:space-y-0">
-        <a href="arwin.site">
-          <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
-            <h2 className="text-xl">DecisionDeskHQ / The Hill</h2>
-            <div className="text-2xl font-semibold">
-              {forecasts.theHill.percentage}%
-            </div>
-            <div
-              className={`-skew-y-2 ${forecasts.theHill.outcome === 'republican' ? repColor : demColor}`}
-            >
-              {forecasts.theHill.outcome === 'republican' ? 'Trump' : 'Biden'}
-            </div>
-          </div>
-        </a>
-        <a href="arwin.site">
-          <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
-            <h2 className="text-xl">Nate Silver</h2>
-            <div className="text-2xl font-semibold opacity-50">?</div>
-            <div className="opacity-50">(paywalled)</div>
-          </div>
-        </a>
+        <ForecastCard forecast={forecasts.theHill} />
+        <ForecastCard forecast={forecasts.nateSilver} />
       </main>
       <footer className="text-gray-600">
-        Last update: {lastUpdate} ago.
+        Last update: {lastUpdate} ago
         {lastUpdateWasOverAnHourAgo && ' Refresh for the latest data.'}
       </footer>
     </>
