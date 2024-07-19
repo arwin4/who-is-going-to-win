@@ -1,7 +1,18 @@
-export default function ForecastCard({ forecast }) {
-  const demColor = 'bg-blue-400';
-  const repColor = 'bg-red-400';
+function OutcomeBanner({ outcome }) {
+  let outcomeColor;
+  if (outcome === 'republican') outcomeColor = 'bg-red-400';
+  if (outcome === 'democrat') outcomeColor = 'bg-blue-400';
+  if (outcome === 'tie') outcomeColor = 'bg-gray-400';
 
+  let outcomeString;
+  if (outcome === 'republican') outcomeString = 'Trump';
+  if (outcome === 'democrat') outcomeString = 'Biden';
+  if (outcome === 'tie') outcomeString = 'tied';
+
+  return <div className={`-skew-y-2 ${outcomeColor}`}>{outcomeString}</div>;
+}
+
+export default function ForecastCard({ forecast }) {
   return (
     <a href={forecast.url}>
       <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
@@ -11,11 +22,7 @@ export default function ForecastCard({ forecast }) {
         >
           {forecast.percentage ? `${forecast.percentage}%` : `(paywalled)`}
         </div>
-        <div
-          className={`-skew-y-2 ${forecast.outcome === 'republican' ? repColor : demColor}`}
-        >
-          {forecast.outcome === 'republican' ? 'Trump' : 'Biden'}
-        </div>
+        <OutcomeBanner outcome={forecast.outcome} />
       </div>
     </a>
   );
