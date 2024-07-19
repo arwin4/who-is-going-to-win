@@ -83,7 +83,9 @@ export default function Index() {
   return (
     <>
       <div className="grid border-yellow-400 p-4 text-center font-sans">
-        <h1 className="text-3xl">Presidential forecast aggregator</h1>
+        <h1 className="text-[clamp(1.15rem,5vw,2rem)]">
+          Presidential forecast aggregator
+        </h1>
       </div>
       <main className="grid space-y-6 sm:grid-flow-col sm:space-x-6 sm:space-y-0">
         <ForecastCard forecast={forecasts.theHill} />
