@@ -10,8 +10,6 @@ export default async function scrapeFiveThirtyEight() {
   const $ = cheerio.load(html);
   const targetElement = $('.rep.text-primary');
 
-  console.log(targetElement.text());
-
   // Extract the complete text content of the element
   const fullPredictionString = targetElement.text();
 
