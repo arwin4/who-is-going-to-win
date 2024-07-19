@@ -12,31 +12,64 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export async function loader() {
-  // const result = await scrape();
-  // console.log(result);
-
+async function getLastScrapeTime() {
   const db = mongodb.db('db');
   const collection = db.collection('test');
-  const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
-  const lastScrapeTime = lastScrapeDoc.lastScrapeTime;
-  const timeDifference = (Date.now() - lastScrapeTime) / 3600000;
-  if (timeDifference > 1) {
-    // 1 hour
+
+  let lastScrapeDoc;
+
+  try {
+    lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
+    if (!lastScrapeDoc) throw new Error();
+
+    return lastScrapeDoc.lastScrapeTime;
+  } catch (err) {
+    console.error('Unable to get last scrape time', err);
+  }
+}
+
+async function isNewScrapeNeeded(lastScrapeTime: number) {
+  try {
+    const timeDifference = (Date.now() - lastScrapeTime) / 3600000;
+    if (timeDifference > 1) {
+      return true;
+    }
+  } catch (err) {
+    console.error('Unable to check if new scrape is needed', err);
+    return false;
+  }
+}
+
+export async function loader() {
+  const lastScrapeTime = await getLastScrapeTime();
+
+  if (await isNewScrapeNeeded(lastScrapeTime)) {
+    console.log('New scrape needed. Starting scrape...');
     scrapeAndSave();
   }
 
-  const theHill = await collection.findOne({ id: 'theHill' });
-  const nateSilver = await collection.findOne({ id: 'nateSilver' });
-  const fiveThirtyEight = await collection.findOne({ id: 'fiveThirtyEight' });
+  let theHill, nateSilver, fiveThirtyEight;
 
-  const forecasts = {
-    theHill,
-    nateSilver,
-    fiveThirtyEight,
-  };
+  // Fetch data from db
+  try {
+    const db = mongodb.db('db');
+    const collection = db.collection('test');
+    theHill = await collection.findOne({ id: 'theHill' });
+    nateSilver = await collection.findOne({ id: 'nateSilver' });
+    fiveThirtyEight = await collection.findOne({ id: 'fiveThirtyEight' });
 
-  return { forecasts, lastScrapeTime };
+    // TODO: try...catch db error
+
+    const forecasts = {
+      theHill,
+      nateSilver,
+      fiveThirtyEight,
+    };
+
+    return { forecasts, lastScrapeTime };
+  } catch (err) {
+    console.error('Unable to fetch forecasts from db');
+  }
 }
 
 export default function Index() {
@@ -46,7 +79,6 @@ export default function Index() {
 
   const lastUpdateWasOverAnHourAgo =
     Date.now() - new Date(lastScrapeTime) > 3600000;
-  console.log(lastUpdateWasOverAnHourAgo);
 
   return (
     <>
