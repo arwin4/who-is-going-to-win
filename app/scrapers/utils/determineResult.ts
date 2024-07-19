@@ -1,16 +1,17 @@
-export default function determineResult(fullPredictionString) {
-  let percentage = fullPredictionString.match(/^[^\d]*(\d+)/)?.at(1);
-  console.log(percentage);
+export default function determineResult(fullPredictionString: string) {
+  const percentageString = fullPredictionString.match(/^[^\d]*(\d+)/)?.at(1);
 
-  if (!percentage) {
+  if (!percentageString) {
     throw new Error('Could not find percentage in string');
   }
 
-  // Determine outcome
-  // let outcome: 'democrat' | 'republican' | 'tie';
-  let outcome = '';
+  // NOTE: percentageString is already expected to be an integer, so rounding may be overkill.
+  let percentage = Math.round(parseFloat(percentageString));
 
-  if (percentage === '50') {
+  // Determine outcome
+  let outcome: 'democrat' | 'republican' | 'tie';
+
+  if (percentage === 50) {
     outcome = 'tie';
   } else if (
     (fullPredictionString.includes('Trump') &&
@@ -21,11 +22,12 @@ export default function determineResult(fullPredictionString) {
     outcome = 'tie';
   } else if (fullPredictionString.includes('Trump')) {
     outcome = 'republican';
-  } else if (fullPredictionString.includes('Biden')) {
+  } else {
     outcome = 'democrat';
   }
 
-  if (parseFloat(percentage) < 50) {
+  // If the percentage of the loser was extracted, reverse the outcome and percentage.
+  if (percentage < 50) {
     percentage = 100 - percentage;
     if (outcome === 'republican') {
       outcome = 'democrat';
@@ -33,11 +35,6 @@ export default function determineResult(fullPredictionString) {
       outcome = 'republican';
     }
   }
-
-  console.log(outcome);
-  console.log(percentage);
-
-  console.log(fullPredictionString);
 
   return {
     outcome: outcome,
