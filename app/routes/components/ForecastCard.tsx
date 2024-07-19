@@ -12,16 +12,24 @@ function OutcomeBanner({ outcome }) {
   return <div className={`-skew-y-2 ${outcomeColor}`}>{outcomeString}</div>;
 }
 
+function ForecastStat({ forecast }) {
+  // Nate Silver's forecast is entered manually so needs a disclaimer
+  const isNateSilver = forecast.id === 'nateSilver';
+  return (
+    <div
+      className={`text-2xl font-semibold ${isNateSilver ? 'opacity-70' : ''}`}
+    >
+      {forecast.percentage}%{isNateSilver && '*'}
+    </div>
+  );
+}
+
 export default function ForecastCard({ forecast }) {
   return (
     <a href={forecast.url}>
       <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
         <h2 className="text-xl">{forecast.formattedName}</h2>
-        <div
-          className={`text-2xl font-semibold ${!forecast.percentage ? 'opacity-70' : ''}`}
-        >
-          {forecast.percentage ? `${forecast.percentage}%` : `(paywalled)`}
-        </div>
+        <ForecastStat forecast={forecast} />
         <OutcomeBanner outcome={forecast.outcome} />
       </div>
     </a>
