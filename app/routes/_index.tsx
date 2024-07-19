@@ -90,9 +90,34 @@ export default function Index() {
         <ForecastCard forecast={forecasts.nateSilver} />
         <ForecastCard forecast={forecasts.fiveThirtyEight} />
       </main>
-      <footer className="text-gray-600">
-        Last update: {lastUpdate} ago
-        {lastUpdateWasOverAnHourAgo && '. Refresh for the latest data.'}
+      <footer className="m-2 pt-8 text-gray-600">
+        <div className="text-center">
+          Last update: {lastUpdate} ago
+          {lastUpdateWasOverAnHourAgo && '. Refresh for the latest data.'}
+        </div>
+        <div className="mt-2 max-w-xl text-center text-sm">
+          This overview is meant as a quick reference only. Please click on a
+          forecast&apos;s card to see details and methodology.
+        </div>
+        <div className="mt-2 max-w-xl text-center text-xs">
+          * Nate Silver&apos;s forecast is behind a paywall. Therefore, its
+          prediction here is not updated automatically. It is updated manually
+          only{' '}
+          <a
+            className="underline hover:text-gray-500 hover:decoration-gray-500"
+            href="https://www.natesilver.net/p/why-i-dont-buy-538s-new-election"
+          >
+            when Silver publicly mentions its current prediction
+          </a>
+          . To see the current prediction,{' '}
+          <a
+            className="underline hover:text-gray-500 hover:decoration-gray-500"
+            href="https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model"
+          >
+            subscribe
+          </a>
+          .
+        </div>
       </footer>
     </>
   );
