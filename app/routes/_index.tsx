@@ -92,8 +92,10 @@ export default function Index() {
       </main>
       <footer className="m-2 pt-8 text-gray-600">
         <div className="text-center">
-          Last update: {lastUpdate} ago
-          {lastUpdateWasOverAnHourAgo && '. Refresh for the latest data.'}
+          Last update: {lastUpdate} ago.
+          {lastUpdateWasOverAnHourAgo
+            ? ' Refresh for the latest data.'
+            : ' Updates every hour.'}
         </div>
         <div className="mt-2 max-w-xl text-center text-sm">
           This overview is meant as a quick reference only. Please click on a
