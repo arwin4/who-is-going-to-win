@@ -17,7 +17,7 @@ function ForecastStat({ forecast }) {
   const isNateSilver = forecast.id === 'nateSilver';
   return (
     <div
-      className={`text-2xl font-semibold ${isNateSilver ? 'opacity-70' : ''}`}
+      className={`text-2xl font-semibold ${isNateSilver ? 'opacity-40' : ''}`}
     >
       {forecast.percentage}%{isNateSilver && '*'}
     </div>
