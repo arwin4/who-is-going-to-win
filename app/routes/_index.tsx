@@ -12,7 +12,7 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader() {
-  let lastScrapeTime, theHill, nateSilver, fiveThirtyEight;
+  let lastScrapeTime, theHill, nateSilver, fiveThirtyEight, economist;
 
   // Fetch data from db
   try {
@@ -22,6 +22,7 @@ export async function loader() {
     theHill = await collection.findOne({ id: 'theHill' });
     nateSilver = await collection.findOne({ id: 'nateSilver' });
     fiveThirtyEight = await collection.findOne({ id: 'fiveThirtyEight' });
+    economist = await collection.findOne({ id: 'theEconomist' });
 
     // TODO: try...catch db error, promise.all(settled)
 
@@ -29,6 +30,7 @@ export async function loader() {
       theHill,
       nateSilver,
       fiveThirtyEight,
+      economist,
     };
 
     lastScrapeTime = lastScrapeDoc.lastScrapeTime;
@@ -55,8 +57,9 @@ export default function Index() {
       </div>
       <main className="grid space-y-6 sm:grid-flow-col sm:space-x-6 sm:space-y-0">
         <ForecastCard forecast={forecasts.theHill} />
-        <ForecastCard forecast={forecasts.nateSilver} />
+        <ForecastCard forecast={forecasts.economist} />
         <ForecastCard forecast={forecasts.fiveThirtyEight} />
+        <ForecastCard forecast={forecasts.nateSilver} />
       </main>
       <footer className="m-2 pt-8 text-gray-600">
         <div className="text-center">

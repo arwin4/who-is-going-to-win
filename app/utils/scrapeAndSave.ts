@@ -2,6 +2,7 @@ import { mongodb } from '~/db.server';
 
 // Scrapers
 import scrapeFiveThirtyEight from '~/scrapers/scrapeFiveThirtyEight';
+import scrapeTheEconomist from '~/scrapers/scrapeTheEconomist';
 import scrapeTheHill from '~/scrapers/scrapeTheHill';
 
 export default async function scrapeAndSave() {
@@ -12,6 +13,7 @@ export default async function scrapeAndSave() {
 
   let theHillResult: ScrapeResult | undefined;
   let fiveThirtyEightResult: ScrapeResult | undefined;
+  let theEconomistResult: ScrapeResult | undefined;
 
   try {
     theHillResult = await scrapeTheHill();
@@ -23,6 +25,12 @@ export default async function scrapeAndSave() {
     fiveThirtyEightResult = await scrapeFiveThirtyEight();
   } catch (err) {
     console.error('Unable to scrape FiveThirtyEight');
+  }
+
+  try {
+    theEconomistResult = await scrapeTheEconomist();
+  } catch (err) {
+    console.error('Unable to scrape The Economist');
   }
 
   const db = mongodb.db('db');
@@ -57,6 +65,22 @@ export default async function scrapeAndSave() {
       );
     } catch (err) {
       console.error('Unable to update db with new FiveThirtyEight data');
+    }
+  }
+
+  if (theEconomistResult) {
+    try {
+      await collection.findOneAndUpdate(
+        { id: 'theEconomist' },
+        {
+          $set: {
+            outcome: theEconomistResult.outcome,
+            percentage: theEconomistResult.percentage,
+          },
+        },
+      );
+    } catch (err) {
+      console.error('Unable to update db with new Economist data');
     }
   }
 

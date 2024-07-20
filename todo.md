@@ -1,0 +1,5 @@
+- limit h1
+- fix ts warnings
+- live loading
+- analytics
+- tw custom css

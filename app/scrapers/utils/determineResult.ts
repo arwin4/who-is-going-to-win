@@ -11,16 +11,21 @@ export default function determineResult(fullPredictionString: string) {
   // Determine outcome
   let outcome: 'democrat' | 'republican' | 'tie';
 
+  console.log(percentage);
+  console.log(fullPredictionString);
+
   if (percentage === 50) {
     outcome = 'tie';
   } else if (
-    (fullPredictionString.includes('Trump') &&
-      fullPredictionString.includes('Biden')) ||
-    (!fullPredictionString.includes('Trump') &&
-      !fullPredictionString.includes('Biden'))
+    fullPredictionString.includes('Trump') &&
+    fullPredictionString.includes('Biden')
   ) {
     outcome = 'tie';
-  } else if (fullPredictionString.includes('Trump')) {
+  } else if (
+    fullPredictionString.includes('Trump') ||
+    (fullPredictionString.includes('R') &&
+      fullPredictionString.includes('in 100'))
+  ) {
     outcome = 'republican';
   } else {
     outcome = 'democrat';
