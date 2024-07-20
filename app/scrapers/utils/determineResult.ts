@@ -13,20 +13,17 @@ export default function determineResult(fullPredictionString: string) {
   }
 
   // Determine outcome
-  let outcome: 'democrat' | 'republican' | 'tie';
-
-  console.log(percentage);
-  console.log(fullPredictionString);
-
-  if (percentage === 50) {
-    outcome = 'tie';
-  } else if (
-    fullPredictionString.includes('Trump') &&
-    fullPredictionString.includes('Biden')
+  if (
+    percentage === 50 ||
+    // If both candidates are mentioned, assume it's a tie
+    (fullPredictionString.includes('Trump') &&
+      fullPredictionString.includes('Biden'))
   ) {
     outcome = 'tie';
   } else if (
+    // 538 & DecisionDesk use candidate's last names
     fullPredictionString.includes('Trump') ||
+    // Economist uses 'R' and 'D'
     (fullPredictionString.includes('R') &&
       fullPredictionString.includes('in 100'))
   ) {
@@ -43,7 +40,7 @@ export default function determineResult(fullPredictionString: string) {
 
   // If the percentage of the loser was extracted, invert the outcome and
   // percentage.
-  if (percentage < 50 || outcome !== 'unknown') {
+  if (percentage < 50 && outcome !== 'unknown') {
     percentage = 100 - percentage;
     if (outcome === 'republican') {
       outcome = 'democrat';
