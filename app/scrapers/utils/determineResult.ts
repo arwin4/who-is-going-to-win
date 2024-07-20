@@ -1,12 +1,7 @@
+import { getPercentageFromString } from './getPercentageFromString';
+
 export default function determineResult(fullPredictionString: string) {
-  const percentageString = fullPredictionString.match(/^[^\d]*(\d+)/)?.at(1);
-
-  if (!percentageString) {
-    throw new Error('Could not find percentage in string');
-  }
-
-  // NOTE: percentageString is already expected to be an integer, so rounding may be overkill.
-  let percentage = Math.round(parseFloat(percentageString));
+  let percentage = getPercentageFromString(fullPredictionString);
 
   // Determine outcome
   let outcome: 'democrat' | 'republican' | 'tie';
