@@ -6,8 +6,9 @@ export default function determineResult(fullPredictionString: string) {
   let percentage = getPercentageFromString(fullPredictionString);
   if (Number.isNaN(percentage)) {
     console.error('Could not find percentage in string');
+    outcome = 'unknown';
     return {
-      outcome: 'unknown',
+      outcome: outcome,
       percentage: 0,
     };
   }
