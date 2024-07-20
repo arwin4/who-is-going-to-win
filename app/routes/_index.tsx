@@ -84,7 +84,7 @@ export default function Index() {
             className="underline hover:text-gray-500 hover:decoration-gray-500"
             href="https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model"
           >
-            subscribe to his newsletter.
+            subscribe to his newsletter
           </a>
           .
         </div>
