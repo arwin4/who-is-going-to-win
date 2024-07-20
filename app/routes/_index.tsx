@@ -63,10 +63,7 @@ export default function Index() {
       </main>
       <footer className="m-2 pt-8 text-gray-600">
         <div className="text-center">
-          Last update: {lastUpdate} ago.
-          {lastUpdateWasOverAnHourAgo
-            ? ' Refresh for the latest data.'
-            : ' Updates every hour.'}
+          Last updated {lastUpdate} ago. Updates every hour.
         </div>
         <div className="mt-2 max-w-xl text-center text-sm">
           This overview is meant as a quick reference only. Please click on a
@@ -87,7 +84,7 @@ export default function Index() {
             className="underline hover:text-gray-500 hover:decoration-gray-500"
             href="https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model"
           >
-            subscribe
+            subscribe to his newsletter.
           </a>
           .
         </div>
