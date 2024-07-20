@@ -45,9 +45,6 @@ export default function Index() {
 
   const lastUpdate = formatDistanceToNow(new Date(lastScrapeTime));
 
-  const lastUpdateWasOverAnHourAgo =
-    Date.now() - new Date(lastScrapeTime) > 3600000;
-
   return (
     <>
       <div className="grid border-yellow-400 p-4 text-center font-sans">
