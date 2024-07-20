@@ -7,7 +7,7 @@ import scrapeTheHill from '~/scrapers/scrapeTheHill';
 
 export default async function scrapeAndSave() {
   type ScrapeResult = {
-    outcome: 'democrat' | 'republican' | 'tie';
+    outcome: 'democrat' | 'republican' | 'tie' | 'unknown';
     percentage: number;
   };
 
