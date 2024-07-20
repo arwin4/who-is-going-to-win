@@ -1,12 +1,11 @@
 import type { LoaderFunction } from '@remix-run/node';
 import scrapeAndSave from '~/utils/scrapeAndSave';
 
-export const loader: LoaderFunction = async () => {
-  // Check for a secret key to ensure the request is from your cron service
-  // const authHeader = request.headers.get('Authorization');
-  // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-  //   return json({ error: 'Unauthorized' }, { status: 401 });
-  // }
+export const loader: LoaderFunction = async ({ request }) => {
+  const authHeader = request.headers.get('Authorization');
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return false;
+  }
 
   try {
     await scrapeAndSave();
