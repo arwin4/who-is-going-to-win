@@ -78,7 +78,7 @@ export default function Index() {
           only{' '}
           <a
             className="underline hover:text-gray-500 hover:decoration-gray-500"
-            href="https://www.natesilver.net/p/why-i-dont-buy-538s-new-election"
+            href="https://www.natesilver.net/p/betting-markets-think-biden-should"
           >
             when Silver publicly mentions its current prediction
           </a>
