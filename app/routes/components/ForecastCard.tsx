@@ -2,12 +2,13 @@ function OutcomeBanner({ outcome }) {
   let outcomeColor;
   if (outcome === 'republican') outcomeColor = 'bg-red-400';
   if (outcome === 'democrat') outcomeColor = 'bg-blue-400';
-  if (outcome === 'tie') outcomeColor = 'bg-gray-400';
+  if (outcome === 'tie' || outcome === 'unknown') outcomeColor = 'bg-gray-400';
 
   let outcomeString;
   if (outcome === 'republican') outcomeString = 'Trump';
   if (outcome === 'democrat') outcomeString = 'Biden';
   if (outcome === 'tie') outcomeString = 'tied';
+  if (outcome === 'unknown') outcomeString = '(error)';
 
   return <div className={`-skew-y-2 ${outcomeColor}`}>{outcomeString}</div>;
 }
