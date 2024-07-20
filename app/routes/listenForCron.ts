@@ -11,7 +11,9 @@ export const loader: LoaderFunction = async () => {
   try {
     await scrapeAndSave();
     console.log('Scraped and saved new data.');
+    return true;
   } catch (error) {
     console.error('Scrape failed:', error);
+    return false;
   }
 };
