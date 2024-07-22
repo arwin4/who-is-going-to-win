@@ -19,5 +19,3 @@ export default async function scrapeFiveThirtyEight() {
 
   return determineResult(fullPredictionString);
 }
-
-scrapeFiveThirtyEight();
