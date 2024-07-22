@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const headers: HeadersFunction = () => ({
-  'Cache-Control': 's-maxage=20, stale-while-revalidate=3600',
+  'Cache-Control': 's-maxage=3600',
 });
 
 export async function loader() {
