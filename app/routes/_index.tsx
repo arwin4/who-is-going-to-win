@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { mongodb } from '../db.server';
 import { formatDistanceToNow } from 'date-fns';
 import ForecastCard from './components/ForecastCard';
+import type { HeadersFunction } from '@vercel/remix';
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,6 +12,10 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const headers: HeadersFunction = () => ({
+  'Cache-Control': 's-maxage=600, stale-while-revalidate=60',
+});
+
 export async function loader() {
   let lastScrapeTime, theHill, nateSilver, fiveThirtyEight, economist;
 
@@ -18,6 +23,9 @@ export async function loader() {
   try {
     const db = mongodb.db('db');
     const collection = db.collection('test');
+
+    console.log('Fetching data from mongodb');
+
     const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
     theHill = await collection.findOne({ id: 'theHill' });
     nateSilver = await collection.findOne({ id: 'nateSilver' });

@@ -1,6 +1,3 @@
-// import axios from 'axios';
-// import * as cheerio from 'cheerio';
-// import determineResult from './utils/determineResult';
 import puppeteer from 'puppeteer';
 import determineResult from './utils/determineResult';
 
@@ -13,6 +10,11 @@ export default async function scrapeTheEconomist() {
     'https://www.economist.com/interactive/us-2024-election/prediction-model/president',
   );
 
+  /**
+  *   NOTE: at the time of implementation, this selector contains the winner.
+      It's unknown whether it will still contain the winner if the prediction
+      were to flip. 
+  */
   await page.waitForSelector('.svelte-h0zoai');
 
   // Extract text from <tspan> elements containing "in 100"
@@ -28,9 +30,7 @@ export default async function scrapeTheEconomist() {
   });
   await browser.close();
 
-  console.log(tspanTexts);
   const fullPredictionString = tspanTexts[3];
-  console.log(fullPredictionString);
 
   return determineResult(fullPredictionString);
 }
