@@ -1,20 +1,43 @@
-import determineResult from './utils/determineResult';
+import { Outcome, Prediction } from './types';
+import { getPercentageFromString } from './utils/getPercentageFromString';
 import loadHtmlForScraping from './utils/loadHtmlForScraping';
 
-export default async function scrapeTheHill() {
-  const url = 'https://elections2024.thehill.com/forecast/2024/president/';
-  const loadedDocument = await loadHtmlForScraping(url);
+export default async function scrapeTheHill(): Promise<Prediction> {
+  try {
+    const url = 'https://elections2024.thehill.com/forecast/2024/president/';
+    const loadedDocument = await loadHtmlForScraping(url);
 
-  const targetElement = loadedDocument(
-    'p:contains("Our model currently predicts that")',
-  );
+    // Node is targeted by text
+    const predictionNode = loadedDocument(
+      'p:contains("Our model currently predicts that")',
+    );
 
-  // Extract the complete text content of the element
-  const fullPredictionString = targetElement.text();
+    // Extract the complete text content of the element
+    const fullPredictionString = predictionNode.text();
 
-  if (!fullPredictionString) {
-    console.error('Could not find the The Hill prediction');
+    // String will contain percentage of the winner
+    const winnerPercentage = getPercentageFromString(fullPredictionString);
+
+    let outcome: Outcome;
+    if (winnerPercentage === 50) {
+      outcome = 'tie';
+    } else if (Number.isNaN(winnerPercentage)) {
+      throw new Error();
+    } else if (fullPredictionString.includes('Trump')) {
+      outcome = 'republican';
+    } else {
+      outcome = 'democrat';
+    }
+
+    return {
+      outcome,
+      percentage: winnerPercentage,
+    };
+  } catch (err) {
+    console.error('Unable to determine The Hill prediction');
+    return {
+      outcome: 'unknown',
+      percentage: NaN,
+    };
   }
-
-  return determineResult(fullPredictionString);
 }
