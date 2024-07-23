@@ -26,12 +26,14 @@ export async function loader() {
     const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
     if (!lastScrapeDoc) throw new Error();
 
-    const theHill = await collection.findOne({ id: 'theHill' });
-    const nateSilver = await collection.findOne({ id: 'nateSilver' });
-    const fiveThirtyEight = await collection.findOne({ id: 'fiveThirtyEight' });
-    const economist = await collection.findOne({ id: 'theEconomist' });
-
-    // TODO: try...catch db error, promise.all(settled)
+    const [theHill, nateSilver, fiveThirtyEight, economist] = await Promise.all(
+      [
+        collection.findOne({ id: 'theHill' }),
+        collection.findOne({ id: 'nateSilver' }),
+        collection.findOne({ id: 'fiveThirtyEight' }),
+        collection.findOne({ id: 'theEconomist' }),
+      ],
+    );
 
     const forecasts = {
       theHill,
