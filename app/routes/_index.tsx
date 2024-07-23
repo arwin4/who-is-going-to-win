@@ -1,5 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData } from '@remix-run/react';
 import { mongodb } from '../db.server';
 import { formatDistanceToNow } from 'date-fns';
 import ForecastCard from './components/ForecastCard';
@@ -17,9 +17,6 @@ export const headers: HeadersFunction = () => ({
 });
 
 export async function loader() {
-  let lastScrapeTime, theHill, nateSilver, fiveThirtyEight, economist;
-
-  // Fetch data from db
   try {
     const db = mongodb.db('db');
     const collection = db.collection('test');
@@ -29,10 +26,10 @@ export async function loader() {
     const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
     if (!lastScrapeDoc) throw new Error();
 
-    theHill = await collection.findOne({ id: 'theHill' });
-    nateSilver = await collection.findOne({ id: 'nateSilver' });
-    fiveThirtyEight = await collection.findOne({ id: 'fiveThirtyEight' });
-    economist = await collection.findOne({ id: 'theEconomist' });
+    const theHill = await collection.findOne({ id: 'theHill' });
+    const nateSilver = await collection.findOne({ id: 'nateSilver' });
+    const fiveThirtyEight = await collection.findOne({ id: 'fiveThirtyEight' });
+    const economist = await collection.findOne({ id: 'theEconomist' });
 
     // TODO: try...catch db error, promise.all(settled)
 
@@ -43,17 +40,18 @@ export async function loader() {
       economist,
     };
 
-    lastScrapeTime = lastScrapeDoc.lastScrapeTime;
+    const lastScrapeTime = new Date(lastScrapeDoc.lastScrapeTime);
     return { forecasts, lastScrapeTime };
   } catch (err) {
     console.error('Unable to fetch forecasts from db');
+    throw err;
   }
 }
 
 export default function Index() {
-  const { forecasts, lastScrapeTime } = useLoaderData();
+  const { forecasts, lastScrapeTime } = useLoaderData<typeof loader>();
 
-  const lastUpdate = formatDistanceToNow(new Date(lastScrapeTime));
+  const lastUpdate = formatDistanceToNow(lastScrapeTime);
 
   return (
     <>
