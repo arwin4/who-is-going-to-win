@@ -6,32 +6,9 @@ import scrapeTheEconomist from '~/scrapers/scrapeTheEconomist';
 import scrapeTheHill from '~/scrapers/scrapeTheHill';
 
 export default async function scrapeAndSave() {
-  type ScrapeResult = {
-    outcome: 'democrat' | 'republican' | 'tie' | 'unknown';
-    percentage: number;
-  };
-
-  let theHillResult: ScrapeResult | undefined;
-  let fiveThirtyEightResult: ScrapeResult | undefined;
-  let theEconomistResult: ScrapeResult | undefined;
-
-  try {
-    theHillResult = await scrapeTheHill();
-  } catch (err) {
-    console.error('Unable to scrape The Hill');
-  }
-
-  try {
-    fiveThirtyEightResult = await scrapeFiveThirtyEight();
-  } catch (err) {
-    console.error('Unable to scrape FiveThirtyEight');
-  }
-
-  try {
-    theEconomistResult = await scrapeTheEconomist();
-  } catch (err) {
-    console.error('Unable to scrape The Economist');
-  }
+  const theHillResult = await scrapeTheHill();
+  const fiveThirtyEightResult = await scrapeFiveThirtyEight();
+  const theEconomistResult = await scrapeTheEconomist();
 
   const db = mongodb.db('db');
   const collection = db.collection('test');
