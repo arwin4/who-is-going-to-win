@@ -16,6 +16,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Analytics />
         <Scripts />
         {children}
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "fe21e357bb5e4748a968382e35120fbb"}'
+        ></script>
       </body>
     </html>
   );
@@ -44,6 +49,11 @@ export function ErrorBoundary() {
           </h2>
         </main>
         <Scripts />
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "fe21e357bb5e4748a968382e35120fbb"}'
+        ></script>
       </body>
     </html>
   );
