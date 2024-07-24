@@ -24,7 +24,7 @@ export async function loader() {
 
     console.log('Fetching data from mongodb');
 
-    const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
+    const lastScrapeDoc = await collection.findOne({ id: 'lastScrapde' });
     if (!lastScrapeDoc) throw new Error();
 
     const [theHill, nateSilver, fiveThirtyEight, economist] = await Promise.all(
@@ -46,8 +46,10 @@ export async function loader() {
     const lastScrapeTime = new Date(lastScrapeDoc.lastScrapeTime);
     return { forecasts, lastScrapeTime };
   } catch (err) {
-    console.error('Unable to fetch forecasts from db');
-    throw err;
+    console.error('Unable to fetch forecasts from database');
+    throw new Response('Unable to fetch forecasts from database', {
+      status: 500,
+    });
   }
 }
 

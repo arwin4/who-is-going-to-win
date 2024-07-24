@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/react';
-import { Links, Meta, Outlet } from '@remix-run/react';
+import { Links, Meta, Outlet, useRouteError } from '@remix-run/react';
 import './tailwind.css';
+import { RouteError } from './types';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,4 +22,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError() as RouteError;
+  console.error(error);
+  return (
+    <html lang="en">
+      <head>
+        <title>Presidential forecast aggregator</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <main className="m-6 grid gap-5 text-center">
+          <h1 className="text-xl">Forecasts unavailable</h1>
+          <h2 className="text-base">
+            Sorry, the forecasts are unavailable at the moment. Please check
+            again later.
+          </h2>
+        </main>
+      </body>
+    </html>
+  );
 }
