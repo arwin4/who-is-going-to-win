@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { Outcome, Prediction, WinnerPercentage } from './types';
+import { Outcome, Prediction, WinnerPercentage } from '../types';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 
 /**

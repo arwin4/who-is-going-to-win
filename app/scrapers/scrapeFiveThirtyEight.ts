@@ -1,4 +1,4 @@
-import { Prediction, Outcome } from './types';
+import { Prediction, Outcome } from '../types';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 import loadHtmlForScraping from './utils/loadHtmlForScraping';
 

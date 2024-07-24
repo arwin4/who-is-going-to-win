@@ -4,6 +4,7 @@ import { mongodb } from '../db.server';
 import { formatDistanceToNow } from 'date-fns';
 import ForecastCard from './components/ForecastCard';
 import type { HeadersFunction } from '@vercel/remix';
+import { Forecast } from '~/types';
 
 export const meta: MetaFunction = () => {
   return [
@@ -63,10 +64,10 @@ export default function Index() {
         </h1>
       </div>
       <main className="grid space-y-6 sm:grid-flow-col sm:space-x-6 sm:space-y-0">
-        <ForecastCard forecast={forecasts.theHill} />
-        <ForecastCard forecast={forecasts.economist} />
-        <ForecastCard forecast={forecasts.fiveThirtyEight} />
-        <ForecastCard forecast={forecasts.nateSilver} />
+        <ForecastCard forecast={forecasts.theHill as Forecast} />
+        <ForecastCard forecast={forecasts.economist as Forecast} />
+        <ForecastCard forecast={forecasts.fiveThirtyEight as Forecast} />
+        <ForecastCard forecast={forecasts.nateSilver as Forecast} />
       </main>
       <footer className="m-2 pt-8 text-gray-600">
         <div className="text-center">
