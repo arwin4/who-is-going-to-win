@@ -9,8 +9,8 @@ export type Prediction = {
 export type Forecast = {
   _id: string;
   id: string;
-  outcome: string;
-  percentage: number | null;
+  outcome: Outcome;
+  percentage: WinnerPercentage;
   formattedName: string;
   url: string;
 };
