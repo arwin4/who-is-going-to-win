@@ -65,7 +65,7 @@ export default function Index() {
           Presidential forecast aggregator
         </h1>
       </div>
-      <main className="m-4 grid space-y-6 md:grid-flow-col md:space-x-4 md:space-y-0">
+      <main className="m-4 grid items-center space-y-6 md:grid-flow-col md:space-x-4 md:space-y-0">
         <ForecastCard forecast={forecasts.theHill as Forecast} />
         <ForecastCard forecast={forecasts.economist as Forecast} />
         <ForecastCard forecast={forecasts.fiveThirtyEight as Forecast} />

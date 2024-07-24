@@ -27,13 +27,24 @@ function ForecastStat({ forecast }: { forecast: Forecast }) {
   );
 }
 
+function ForecastData({ forecast }: { forecast: Forecast }) {
+  if (forecast.outcome === 'unknown') {
+    return <div className="">There was an error getting this forecast. </div>;
+  }
+  return (
+    <>
+      <ForecastStat forecast={forecast} />
+      <OutcomeBanner outcome={forecast.outcome} />
+    </>
+  );
+}
+
 export default function ForecastCard({ forecast }: { forecast: Forecast }) {
   return (
     <a href={forecast.url}>
       <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
         <h2 className="text-xl">{forecast.formattedName}</h2>
-        <ForecastStat forecast={forecast} />
-        <OutcomeBanner outcome={forecast.outcome as Outcome} />
+        <ForecastData forecast={forecast} />
       </div>
     </a>
   );
