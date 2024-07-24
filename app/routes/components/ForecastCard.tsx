@@ -8,7 +8,7 @@ function OutcomeBanner({ outcome }: { outcome: Outcome }) {
 
   let outcomeString;
   if (outcome === 'republican') outcomeString = 'Trump';
-  if (outcome === 'democrat') outcomeString = 'Biden';
+  if (outcome === 'democrat') outcomeString = 'Harris';
   if (outcome === 'tie') outcomeString = 'tied';
   if (outcome === 'unknown') outcomeString = '(error)';
 
