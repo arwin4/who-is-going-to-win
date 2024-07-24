@@ -24,7 +24,7 @@ export async function loader() {
 
     console.log('Fetching data from mongodb');
 
-    const lastScrapeDoc = await collection.findOne({ id: 'lastScrapde' });
+    const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
     if (!lastScrapeDoc) throw new Error();
 
     const [theHill, nateSilver, fiveThirtyEight, economist] = await Promise.all(
