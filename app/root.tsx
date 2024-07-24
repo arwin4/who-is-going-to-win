@@ -55,7 +55,7 @@ export function ErrorBoundary() {
   return (
     <html lang="en">
       <head>
-        <title>Presidential forecast aggregator</title>
+        <title>Who Is Going To Win?</title>
         <Meta />
         <Links />
 

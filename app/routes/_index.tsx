@@ -8,8 +8,11 @@ import { Forecast } from '~/types';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Presidential forecast aggregator' },
-    { name: 'description', content: 'Presidential forecast aggregator' },
+    { title: 'Who Is Going To Win?' },
+    {
+      name: 'description',
+      content: 'Presidential election forecast aggregator',
+    },
   ];
 };
 
