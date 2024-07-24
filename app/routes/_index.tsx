@@ -26,7 +26,7 @@ export async function loader() {
     const db = mongodb.db('db');
     const collection = db.collection('test');
 
-    await scrapeAndSave();
+    // await scrapeAndSave();
 
     console.log('Fetching data from mongodb');
 
@@ -73,10 +73,22 @@ export default function Index() {
         <h2>A presidential election forecast aggregator</h2>
       </div>
       <main className="m-4 grid items-center space-y-6 md:grid-flow-col md:space-x-4 md:space-y-0">
-        <ForecastCard forecast={forecasts.theHill as Forecast} />
-        <ForecastCard forecast={forecasts.economist as Forecast} />
-        <ForecastCard forecast={forecasts.fiveThirtyEight as Forecast} />
-        <ForecastCard forecast={forecasts.nateSilver as Forecast} />
+        <ForecastCard
+          forecast={forecasts.theHill as Forecast}
+          isSuspended={true}
+        />
+        <ForecastCard
+          forecast={forecasts.economist as Forecast}
+          isSuspended={true}
+        />
+        <ForecastCard
+          forecast={forecasts.fiveThirtyEight as Forecast}
+          isSuspended={true}
+        />
+        <ForecastCard
+          forecast={forecasts.nateSilver as Forecast}
+          isSuspended={true}
+        />
       </main>
       <footer className="m-2 pt-8 text-gray-600">
         <div className="text-center">

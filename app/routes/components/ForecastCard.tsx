@@ -39,12 +39,24 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
   );
 }
 
-export default function ForecastCard({ forecast }: { forecast: Forecast }) {
+export default function ForecastCard({
+  forecast,
+  isSuspended,
+}: {
+  forecast: Forecast;
+  isSuspended: boolean;
+}) {
   return (
     <a href={forecast.url}>
       <div className="grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center shadow-lg hover:bg-yellow-300">
         <h2 className="text-xl">{forecast.formattedName}</h2>
-        <ForecastData forecast={forecast} />
+        {isSuspended ? (
+          <div className="mt-5 bg-gray-400 p-2">
+            This forecast is currently suspended.
+          </div>
+        ) : (
+          <ForecastData forecast={forecast} />
+        )}
       </div>
     </a>
   );
