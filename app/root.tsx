@@ -11,6 +11,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="favicons/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="favicons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="favicons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="m-0 flex min-h-screen flex-col place-items-center justify-around bg-slate-300  text-gray-800">
         <Analytics />
@@ -39,6 +58,25 @@ export function ErrorBoundary() {
         <title>Presidential forecast aggregator</title>
         <Meta />
         <Links />
+
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="favicons/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="favicons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="favicons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body>
         <main className="m-6 grid gap-5 text-center">
