@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const headers: HeadersFunction = () => ({
-  'Cache-Control': 's-maxage=600, stale-while-revalidate=60',
+  'Cache-Control': 's-maxage=1800, stale-while-revalidate=60',
 });
 
 export async function loader() {
