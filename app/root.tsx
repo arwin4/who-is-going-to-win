@@ -1,5 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
-import { Links, Meta, Outlet, useRouteError } from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, useRouteError } from '@remix-run/react';
 import './tailwind.css';
 import { RouteError } from './types';
 
@@ -14,6 +14,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="m-0 flex min-h-screen flex-col place-items-center justify-around bg-slate-300  text-gray-800">
         <Analytics />
+        <Scripts />
         {children}
       </body>
     </html>
@@ -42,6 +43,7 @@ export function ErrorBoundary() {
             again later.
           </h2>
         </main>
+        <Scripts />
       </body>
     </html>
   );
