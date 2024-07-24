@@ -5,6 +5,7 @@ import { formatDistanceToNow } from 'date-fns';
 import ForecastCard from './components/ForecastCard';
 import type { HeadersFunction } from '@vercel/remix';
 import { Forecast } from '~/types';
+import scrapeAndSave from '~/utils/scrapeAndSave';
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,6 +25,8 @@ export async function loader() {
   try {
     const db = mongodb.db('db');
     const collection = db.collection('test');
+
+    await scrapeAndSave();
 
     console.log('Fetching data from mongodb');
 
