@@ -1,4 +1,3 @@
-import type { MetaFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { formatDistanceToNow } from 'date-fns';
 import ForecastCard from './components/ForecastCard';
@@ -6,19 +5,11 @@ import type { HeadersFunction } from '@vercel/remix';
 import { Forecast } from '~/types';
 import redis from '~/utils/redis';
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: 'Who Is Going To Win?' },
-    {
-      name: 'description',
-      content: 'Presidential election forecast aggregator',
-    },
-  ];
-};
-
 export const headers: HeadersFunction = () => ({
   'Cache-Control': 's-maxage=1800, stale-while-revalidate=60',
 });
+
+export const config = { runtime: 'edge' };
 
 export async function loader() {
   try {
