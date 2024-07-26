@@ -20,6 +20,8 @@ export const headers: HeadersFunction = () => ({
   'Cache-Control': 's-maxage=1800, stale-while-revalidate=60',
 });
 
+export const config = { runtime: 'edge' };
+
 export async function loader() {
   try {
     const [forecasts, lastScrapeDoc] = await redis.mget(
