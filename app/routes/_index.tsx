@@ -3,7 +3,7 @@ import { formatDistanceToNow } from 'date-fns';
 import ForecastCard from './components/ForecastCard';
 import type { HeadersFunction } from '@vercel/remix';
 import { Forecast } from '~/types';
-import redis from '~/utils/redis';
+// import redis from '~/utils/redis';
 
 export const headers: HeadersFunction = () => ({
   'Cache-Control': 's-maxage=1800, stale-while-revalidate=60',
@@ -13,10 +13,46 @@ export const config = { runtime: 'edge' };
 
 export async function loader() {
   try {
-    const [forecasts, lastScrapeDoc] = await redis.mget(
-      'forecasts',
-      'lastScrapeTime',
-    );
+    // const [forecasts, lastScrapeDoc] = await redis.mget(
+    //   'forecasts',
+    //   'lastScrapeTime',
+    // );
+    const forecasts = {
+      economist: {
+        _id: '669ab926f2d8c731f5e6d8be',
+        formattedName: 'The Economist',
+        id: 'theEconomist',
+        outcome: 'republican',
+        percentage: 83,
+        url: 'https://www.economist.com/interactive/us-2024-election/prediction-model/president',
+      },
+      fiveThirtyEight: {
+        _id: '6699732af2d8c731f5e6d8bd',
+        formattedName: 'FiveThirtyEight',
+        id: 'fiveThirtyEight',
+        outcome: 'unknown',
+        percentage: null,
+        url: 'https://projects.fivethirtyeight.com/2024-election-forecast/',
+      },
+      nateSilver: {
+        _id: '66996be4f2d8c731f5e6d8bc',
+        formattedName: 'Nate Silver',
+        id: 'nateSilver',
+        outcome: 'republican',
+        percentage: 74,
+        url: 'https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model/',
+      },
+      theHill: {
+        _id: '66993c0b6cd0aa9280ae674c',
+        formattedName: 'DecisionDeskHQ / The Hill',
+        id: 'theHill',
+        outcome: 'republican',
+        percentage: 56,
+        url: 'https://elections2024.thehill.com/forecast/2024/president/',
+      },
+    };
+
+    const lastScrapeDoc = '2024-07-26T12:31:22.728Z';
 
     const lastScrapeTime = new Date(lastScrapeDoc);
 
