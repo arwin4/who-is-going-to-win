@@ -1,11 +1,10 @@
 import type { MetaFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { mongodb } from '../db.server';
 import { formatDistanceToNow } from 'date-fns';
 import ForecastCard from './components/ForecastCard';
 import type { HeadersFunction } from '@vercel/remix';
 import { Forecast } from '~/types';
-import scrapeAndSave from '~/utils/scrapeAndSave';
+import redis from '~/utils/redis';
 
 export const meta: MetaFunction = () => {
   return [
@@ -23,33 +22,13 @@ export const headers: HeadersFunction = () => ({
 
 export async function loader() {
   try {
-    const db = mongodb.db('db');
-    const collection = db.collection('test');
-
-    // await scrapeAndSave();
-
-    console.log('Fetching data from mongodb');
-
-    const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
-    if (!lastScrapeDoc) throw new Error();
-
-    const [theHill, nateSilver, fiveThirtyEight, economist] = await Promise.all(
-      [
-        collection.findOne({ id: 'theHill' }),
-        collection.findOne({ id: 'nateSilver' }),
-        collection.findOne({ id: 'fiveThirtyEight' }),
-        collection.findOne({ id: 'theEconomist' }),
-      ],
+    const [forecasts, lastScrapeDoc] = await redis.mget(
+      'forecasts',
+      'lastScrapeTime',
     );
 
-    const forecasts = {
-      theHill,
-      nateSilver,
-      fiveThirtyEight,
-      economist,
-    };
+    const lastScrapeTime = new Date(lastScrapeDoc);
 
-    const lastScrapeTime = new Date(lastScrapeDoc.lastScrapeTime);
     return { forecasts, lastScrapeTime };
   } catch (err) {
     console.error('Unable to fetch forecasts from database');
@@ -75,19 +54,19 @@ export default function Index() {
       <main className="m-4 grid items-center space-y-6 md:grid-flow-col md:space-x-4 md:space-y-0">
         <ForecastCard
           forecast={forecasts.theHill as Forecast}
-          isSuspended={true}
+          // isSuspended={true}
         />
         <ForecastCard
           forecast={forecasts.economist as Forecast}
-          isSuspended={true}
+          // isSuspended={true}
         />
         <ForecastCard
           forecast={forecasts.fiveThirtyEight as Forecast}
-          isSuspended={true}
+          // isSuspended={true}
         />
         <ForecastCard
           forecast={forecasts.nateSilver as Forecast}
-          isSuspended={true}
+          // isSuspended={true}
         />
       </main>
       <footer className="m-2 pt-8 text-gray-600">
