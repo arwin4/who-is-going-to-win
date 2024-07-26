@@ -3,6 +3,8 @@ import { Links, Meta, Outlet, Scripts, useRouteError } from '@remix-run/react';
 import './tailwind.css';
 import { RouteError } from './types';
 
+export const config = { runtime: 'edge' };
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
