@@ -1,3 +1,4 @@
+
 /** @type {import('@remix-run/dev').AppConfig} */
 export default {
   ignoredRouteFiles: ['**/.*'],
@@ -9,4 +10,6 @@ export default {
   //   v2_routeConvention: true,
   // },
   // serverBuildPath: 'build/index.js',
+  // serverDependenciesToBundle: ['@upstash/redis', 'cheerio'],
+
 };

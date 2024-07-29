@@ -1,9 +1,9 @@
 import { useLoaderData } from '@remix-run/react';
 import { formatDistanceToNow } from 'date-fns';
-import ForecastCard from './components/ForecastCard';
+import ForecastCard from '../components/ForecastCard.js';
 import type { HeadersFunction } from '@vercel/remix';
-import { Forecast } from '~/types';
-import redis from '~/utils/redis';
+import type { Forecast } from '~/types';
+import redis from '../utils/redis';
 
 export const headers: HeadersFunction = () => ({
   'Cache-Control': 's-maxage=1800, stale-while-revalidate=60',
@@ -13,15 +13,12 @@ export const config = { runtime: 'edge' };
 
 export async function loader() {
   try {
-    // const startDate = new Date();
     const [forecasts, lastScrapeDoc] = await redis.mget(
       'forecasts',
       'lastScrapeTime',
     );
-    // const endDate = new Date();
 
     const lastScrapeTime = new Date(lastScrapeDoc);
-    // console.log('Data loaded from redis', endDate - startDate);
 
     return { forecasts, lastScrapeTime };
   } catch (err) {

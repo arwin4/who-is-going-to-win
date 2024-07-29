@@ -1,40 +1,8 @@
-# Welcome to Remix!
+# Remix on Vercel Edge Functions
 
-- 📖 [Remix docs](https://remix.run/docs)
+This is a demo of Remix running on Vercel Edge Functions (https://remix-on-the-edge.vercel.app/).
 
-## Development
-
-Run the dev server:
-
-```shellscript
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+- Streaming SSR: Dynamically stream content with both Node.js and Edge runtimes
+- API Routes: Easily build your serverless API with Remix and a route `loader`
+- Advanced Caching: Use powerful cache headers like `stale-while-revalidate`
+- Data Mutations: Run `actions` inside Serverless/Edge Functions

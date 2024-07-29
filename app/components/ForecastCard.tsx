@@ -1,4 +1,4 @@
-import { Forecast, Outcome } from '~/types';
+import type { Forecast, Outcome } from '~/types';
 
 function OutcomeBanner({ outcome }: { outcome: Outcome }) {
   let outcomeColor;

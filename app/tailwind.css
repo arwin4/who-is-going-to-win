@@ -6,6 +6,6 @@
   @font-face {
     font-family: 'Noto Sans';
     font-display: swap;
-    src: url(/fonts/NotoSans.ttf);
+    src: url(../fonts/NotoSans.ttf);
   }
 }

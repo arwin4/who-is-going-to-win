@@ -1,4 +1,4 @@
-import { mongodb } from '~/db.server';
+import mongoose from 'mongoose';
 
 // Scrapers
 import scrapeFiveThirtyEight from '~/scrapers/scrapeFiveThirtyEight';
@@ -10,8 +10,11 @@ export default async function scrapeAndSave() {
   const fiveThirtyEightResult = await scrapeFiveThirtyEight();
   const theEconomistResult = await scrapeTheEconomist();
 
-  const db = mongodb.db('db');
-  const collection = db.collection('test');
+  const connectionString = process.env.CONNECTION_STRING || '';
+
+  await mongoose.connect(connectionString);
+
+  const collection = mongoose.connection.collection('test');
 
   if (theHillResult) {
     try {

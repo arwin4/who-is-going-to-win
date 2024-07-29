@@ -1,8 +1,12 @@
 node_modules
 
-/.cache
-/build
+.cache
 .env
 .vercel
+.output
+.DS_Store
 
-public/build
+/build/
+/public/build
+/api/index.js
+/api/index.js.map

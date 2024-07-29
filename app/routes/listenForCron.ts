@@ -1,13 +1,13 @@
-import type { LoaderFunction } from '@remix-run/node';
-import { mongodb } from '~/db.server';
-import redis from '~/utils/redis';
 import scrapeAndSave from '~/utils/scrapeAndSave';
+import redis from '../utils/redis';
+import mongoose from 'mongoose';
 
 async function getMongoDBData() {
-  const db = mongodb.db('db');
-  const collection = db.collection('test');
+  const collection = mongoose.connection.collection('test');
 
   const lastScrapeDoc = await collection.findOne({ id: 'lastScrape' });
+  console.log(lastScrapeDoc);
+
   if (!lastScrapeDoc) throw new Error();
 
   const [theHill, nateSilver, fiveThirtyEight, economist] = await Promise.all([
@@ -29,17 +29,19 @@ async function getMongoDBData() {
   return { forecasts, lastScrapeTime };
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }) => {
   const authHeader = request.headers.get('Authorization');
-  // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-  //   return false;
-  // }
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return false;
+  }
 
   try {
     await scrapeAndSave();
     const { forecasts, lastScrapeTime } = await getMongoDBData();
 
     console.log('Scraped and saved new data to MongoDB.');
+    mongoose.disconnect();
+
     await redis.mset({
       forecasts: JSON.stringify(forecasts),
       lastScrapeTime: JSON.stringify(lastScrapeTime),
