@@ -60,7 +60,7 @@ export default function Index() {
           isSuspended={false}
         />
       </main>
-      <footer className="m-2 mb-10 pt-8 text-gray-600">
+      <footer className="m-2 mx-6 mb-10 pt-8 text-gray-600">
         <div className="text-center">
           Last updated {lastUpdate} ago. Updates every hour.
         </div>
