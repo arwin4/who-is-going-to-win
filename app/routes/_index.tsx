@@ -57,10 +57,10 @@ export default function Index() {
         />
         <ForecastCard
           forecast={forecasts.nateSilver as Forecast}
-          isSuspended={true}
+          isSuspended={false}
         />
       </main>
-      <footer className="m-2 pt-8 text-gray-600">
+      <footer className="m-2 mb-10 pt-8 text-gray-600">
         <div className="text-center">
           Last updated {lastUpdate} ago. Updates every hour.
         </div>
@@ -74,7 +74,7 @@ export default function Index() {
           only{' '}
           <a
             className="underline hover:text-gray-500 hover:decoration-gray-500"
-            href="https://www.natesilver.net/p/betting-markets-think-biden-should"
+            href="https://x.com/NateSilver538/status/1818324321645064416"
           >
             when Silver publicly mentions its current prediction
           </a>

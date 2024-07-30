@@ -18,13 +18,15 @@ function OutcomeBanner({ outcome }: { outcome: Outcome }) {
 function ForecastStat({ forecast }: { forecast: Forecast }) {
   // Nate Silver's forecast is entered manually so needs a disclaimer
   const isNateSilver = forecast.id === 'nateSilver';
-  return (
-    <div
-      className={`text-2xl font-semibold ${isNateSilver ? 'opacity-55' : ''}`}
-    >
-      {forecast.percentage}%{isNateSilver && '*'}
-    </div>
-  );
+
+  if (isNateSilver)
+    return (
+      <div className="opacity-55">
+        <div className="text-2xl font-semibold">{forecast.percentage}%</div>
+        <span className="text-sm"> (on July 30)*</span>
+      </div>
+    );
+  return <div className="text-2xl font-semibold">{forecast.percentage}%</div>;
 }
 
 function ForecastData({ forecast }: { forecast: Forecast }) {
