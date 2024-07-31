@@ -37,7 +37,11 @@ export default function Index() {
           unstable_viewTransition
         >
           A presidential election forecast aggregator
-          <span className="pl-2 text-xl"> 🛈</span>
+          <img
+            src="assets/info-icon.svg"
+            className="w-7 pl-2"
+            alt="Information"
+          />
         </Link>
       </div>
       <main className="m-4 mt-0 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">
