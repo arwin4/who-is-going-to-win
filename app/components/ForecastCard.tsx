@@ -36,7 +36,7 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
 
   return (
     <>
-      {forecast.id === 'polymarket' && '(betting market, not a forecast)'}
+      {forecast.id === 'polymarket' && '(betting market, not a model)'}
       <ForecastStat forecast={forecast} />
       <OutcomeBanner outcome={forecast.outcome} />
     </>
