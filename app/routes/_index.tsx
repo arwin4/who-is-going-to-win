@@ -36,13 +36,13 @@ export default function Index() {
 
   return (
     <>
-      <div className="grid border-yellow-400 p-4 text-center font-sans">
+      <div className="grid border-yellow-400 p-4 text-center font-sans md:mb-4">
         <h1 className="text-[clamp(1.5rem,5vw,2rem)] font-semibold">
           Who Is Going To Win?
         </h1>
         <h2>A presidential election forecast aggregator</h2>
       </div>
-      <main className="m-4 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">
+      <main className="m-4 mt-0 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">
         <div className="space-x-4 space-y-4 md:space-x-4">
           <ForecastCard
             forecast={forecasts.nateSilver as Forecast}
