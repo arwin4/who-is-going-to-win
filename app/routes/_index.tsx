@@ -42,27 +42,31 @@ export default function Index() {
         </h1>
         <h2>A presidential election forecast aggregator</h2>
       </div>
-      <main className="m-4 grid items-center space-y-6 md:grid-flow-col md:space-x-4 md:space-y-0">
-        <ForecastCard
-          forecast={forecasts.theHill as Forecast}
-          isSuspended={true}
-        />
-        <ForecastCard
-          forecast={forecasts.economist as Forecast}
-          isSuspended={true}
-        />
-        <ForecastCard
-          forecast={forecasts.fiveThirtyEight as Forecast}
-          isSuspended={true}
-        />
-        <ForecastCard
-          forecast={forecasts.nateSilver as Forecast}
-          isSuspended={false}
-        />
-        <ForecastCard
-          forecast={forecasts.polymarket as Forecast}
-          isSuspended={false}
-        />
+      <main className="m-4 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">
+        <div className="space-x-4 space-y-4 md:space-x-4">
+          <ForecastCard
+            forecast={forecasts.nateSilver as Forecast}
+            isSuspended={false}
+          />
+          <ForecastCard
+            forecast={forecasts.polymarket as Forecast}
+            isSuspended={false}
+          />
+        </div>
+        <div className="space-x-4 space-y-4 md:space-x-4">
+          <ForecastCard
+            forecast={forecasts.theHill as Forecast}
+            isSuspended={true}
+          />
+          <ForecastCard
+            forecast={forecasts.economist as Forecast}
+            isSuspended={true}
+          />
+          <ForecastCard
+            forecast={forecasts.fiveThirtyEight as Forecast}
+            isSuspended={true}
+          />
+        </div>
       </main>
       <footer className="m-2 mx-6 mb-10 pt-8 text-gray-600">
         <div className="text-center">
