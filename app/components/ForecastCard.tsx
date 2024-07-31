@@ -33,8 +33,10 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
   if (forecast.outcome === 'unknown') {
     return <div className="">There was an error getting this forecast. </div>;
   }
+
   return (
     <>
+      {forecast.id === 'polymarket' && '(betting market, not a forecast)'}
       <ForecastStat forecast={forecast} />
       <OutcomeBanner outcome={forecast.outcome} />
     </>

@@ -59,6 +59,10 @@ export default function Index() {
           forecast={forecasts.nateSilver as Forecast}
           isSuspended={false}
         />
+        <ForecastCard
+          forecast={forecasts.polymarket as Forecast}
+          isSuspended={false}
+        />
       </main>
       <footer className="m-2 mx-6 mb-10 pt-8 text-gray-600">
         <div className="text-center">

@@ -4,11 +4,13 @@ import mongoose from 'mongoose';
 import scrapeFiveThirtyEight from '~/scrapers/scrapeFiveThirtyEight';
 import scrapeTheEconomist from '~/scrapers/scrapeTheEconomist';
 import scrapeTheHill from '~/scrapers/scrapeTheHill';
+import getPolymarket from '~/scrapers/getPolymarket';
 
 export default async function scrapeAndSave() {
   const theHillResult = await scrapeTheHill();
   const fiveThirtyEightResult = await scrapeFiveThirtyEight();
   const theEconomistResult = await scrapeTheEconomist();
+  const polymarketResult = await getPolymarket();
 
   const connectionString = process.env.CONNECTION_STRING || '';
 
@@ -61,6 +63,22 @@ export default async function scrapeAndSave() {
       );
     } catch (err) {
       console.error('Unable to update db with new Economist data');
+    }
+  }
+
+  if (polymarketResult) {
+    try {
+      await collection.findOneAndUpdate(
+        { id: 'polymarket' },
+        {
+          $set: {
+            outcome: polymarketResult.outcome,
+            percentage: polymarketResult.percentage,
+          },
+        },
+      );
+    } catch (err) {
+      console.error('Unable to update db with new Polymarket data');
     }
   }
 

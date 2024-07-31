@@ -10,18 +10,21 @@ async function getMongoDBData() {
 
   if (!lastScrapeDoc) throw new Error();
 
-  const [theHill, nateSilver, fiveThirtyEight, economist] = await Promise.all([
-    collection.findOne({ id: 'theHill' }),
-    collection.findOne({ id: 'nateSilver' }),
-    collection.findOne({ id: 'fiveThirtyEight' }),
-    collection.findOne({ id: 'theEconomist' }),
-  ]);
+  const [theHill, nateSilver, fiveThirtyEight, economist, polymarket] =
+    await Promise.all([
+      collection.findOne({ id: 'theHill' }),
+      collection.findOne({ id: 'nateSilver' }),
+      collection.findOne({ id: 'fiveThirtyEight' }),
+      collection.findOne({ id: 'theEconomist' }),
+      collection.findOne({ id: 'polymarket' }),
+    ]);
 
   const forecasts = {
     theHill,
     nateSilver,
     fiveThirtyEight,
     economist,
+    polymarket,
   };
 
   const lastScrapeTime = new Date(lastScrapeDoc.lastScrapeTime);
