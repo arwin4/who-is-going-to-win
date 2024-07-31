@@ -41,7 +41,7 @@ export default function Explanation(): React.JSX.Element {
           prediction is updated manually only{' '}
           <a
             className="underline hover:text-gray-500 hover:decoration-gray-500"
-            href="https://x.com/NateSilver538/status/1818324321645064416"
+            href="https://x.com/NateSilver538/status/1818659822452998309"
           >
             when Silver mentions its current prediction publicly
           </a>

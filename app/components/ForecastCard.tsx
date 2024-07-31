@@ -23,7 +23,7 @@ function ForecastStat({ forecast }: { forecast: Forecast }) {
     return (
       <div className="opacity-55">
         <div className="text-2xl font-semibold">{forecast.percentage}%</div>
-        <span className="text-sm"> (on July 30)*</span>
+        <span className="text-sm"> (on July 31)</span>
       </div>
     );
   return <div className="text-2xl font-semibold">{forecast.percentage}%</div>;
