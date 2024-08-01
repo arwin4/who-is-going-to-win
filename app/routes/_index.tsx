@@ -3,6 +3,7 @@ import ForecastCard from '../components/ForecastCard.js';
 import type { HeadersFunction } from '@vercel/remix';
 import type { Forecast } from '~/types';
 import redis from '../utils/redis';
+import { formatDistanceToNowStrict } from 'date-fns';
 
 export const headers: HeadersFunction = () => ({
   'Cache-Control': 's-maxage=1800, stale-while-revalidate=60',
@@ -12,8 +13,12 @@ export const config = { runtime: 'edge' };
 
 export async function loader() {
   try {
-    const forecasts = await redis.get('forecasts');
-    return { forecasts };
+    const [forecasts, lastScrapeDoc] = await redis.mget(
+      'forecasts',
+      'lastScrapeTime',
+    );
+
+    return { forecasts, lastScrapeDoc };
   } catch (err) {
     console.error('Unable to fetch forecasts from database');
     throw new Response('Unable to fetch forecasts from database', {
@@ -23,7 +28,9 @@ export async function loader() {
 }
 
 export default function Index() {
-  const { forecasts } = useLoaderData<typeof loader>();
+  const { forecasts, lastScrapeDoc } = useLoaderData<typeof loader>();
+
+  const lastUpdate = formatDistanceToNowStrict(lastScrapeDoc);
 
   return (
     <>
@@ -34,15 +41,20 @@ export default function Index() {
         <Link
           to="explanation"
           prefetch="render"
-          className="flex items-center bg-slate-300 px-4 py-1 hover:bg-slate-400/50"
+          className=" bg-slate-300 px-4 py-1 hover:bg-slate-400/50"
           unstable_viewTransition
         >
-          A presidential election forecast aggregator
-          <img
-            src="assets/info-icon.svg"
-            className="w-7 pl-2"
-            alt="Information"
-          />
+          <div className="grid grid-flow-col">
+            <div className="">
+              <div>A presidential election forecast aggregator</div>
+              <div className="text-sm opacity-80">Updated {lastUpdate} ago</div>
+            </div>
+            <img
+              src="assets/info-icon.svg"
+              className="w-7 self-center pl-2 "
+              alt="Information"
+            />
+          </div>
         </Link>
       </div>
       <main className="m-4 mt-0 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">

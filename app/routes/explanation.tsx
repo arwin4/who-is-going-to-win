@@ -1,29 +1,9 @@
-import { Link, useLoaderData } from '@remix-run/react';
+import { Link } from '@remix-run/react';
 import React from 'react';
-import { formatDistanceToNowStrict } from 'date-fns';
-import redis from '../utils/redis';
 
 export const config = { runtime: 'edge' };
 
-export async function loader() {
-  try {
-    const lastScrapeDoc = await redis.get('lastScrapeTime');
-
-    const lastScrapeTime = new Date(lastScrapeDoc);
-
-    return { lastScrapeTime };
-  } catch (err) {
-    console.error('Unable to fetch last scrape time from database');
-    throw new Response('Unable to fetch last scrape time from database', {
-      status: 500,
-    });
-  }
-}
-
 export default function Explanation(): React.JSX.Element {
-  const { lastScrapeTime } = useLoaderData<typeof loader>();
-
-  const lastUpdate = formatDistanceToNowStrict(lastScrapeTime);
   return (
     <>
       <main className="m-4 mx-6 grid max-w-xl gap-4 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-6 text-center text-gray-600 shadow-lg">
@@ -53,10 +33,6 @@ export default function Explanation(): React.JSX.Element {
             subscribe to his newsletter
           </a>
           .
-        </div>
-        <div className="text-sm">
-          Forecasts were refreshed{' '}
-          <span className="font-semibold">{lastUpdate} ago</span>.
         </div>
       </main>
       <Link
