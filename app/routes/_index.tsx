@@ -41,21 +41,17 @@ export default function Index() {
         <Link
           to="explanation"
           prefetch="render"
-          className=" bg-slate-300 px-4 py-1 hover:bg-slate-400/50"
+          className="grid grid-flow-col bg-slate-300 px-4 py-1 hover:bg-slate-400/50"
           unstable_viewTransition
         >
-          <div className="grid grid-flow-col">
-            <div className="">
-              <div>A presidential election forecast aggregator</div>
-              <div className="text-sm opacity-80">Updated {lastUpdate} ago</div>
-            </div>
-            <img
-              src="assets/info-icon.svg"
-              className="w-7 self-center pl-2 "
-              alt="Information"
-            />
-          </div>
+          A presidential election forecast aggregator
+          <img
+            src="assets/info-icon.svg"
+            className="w-7 self-center pl-2"
+            alt="Information"
+          />
         </Link>
+        <div className="mt-2 text-sm opacity-80">Updated {lastUpdate} ago</div>
       </div>
       <main className="m-4 mt-0 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">
         <div className="space-x-4 space-y-4 md:space-x-4">
