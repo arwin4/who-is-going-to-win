@@ -24,7 +24,7 @@ export default function App() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Who Is Going To Win?</title>
         </head>
-        <body className="m-0 flex min-h-screen flex-col place-items-center justify-evenly bg-slate-200 text-gray-800">
+        <body className="m-0 flex min-h-screen flex-col place-items-center justify-center bg-slate-200 text-gray-800 md:gap-10">
           <Outlet />
           <Scripts />
           <LiveReload />
