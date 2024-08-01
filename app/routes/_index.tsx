@@ -33,6 +33,7 @@ export default function Index() {
         </h1>
         <Link
           to="explanation"
+          prefetch="render"
           className="flex items-center bg-slate-300 px-4 py-1 hover:bg-slate-400/50"
           unstable_viewTransition
         >

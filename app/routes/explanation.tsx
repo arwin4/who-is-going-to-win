@@ -62,6 +62,7 @@ export default function Explanation(): React.JSX.Element {
       <Link
         className="mb-4 text-xl font-semibold text-gray-600 underline hover:text-gray-500 hover:decoration-gray-500"
         to="/"
+        prefetch="render"
         unstable_viewTransition
       >
         Back to overview
