@@ -30,7 +30,8 @@ export async function loader() {
 export default function Index() {
   const { forecasts, lastScrapeDoc } = useLoaderData<typeof loader>();
 
-  const lastUpdate = formatDistanceToNowStrict(lastScrapeDoc);
+  const lastScrapeTime = new Date(lastScrapeDoc);
+  const lastUpdate = formatDistanceToNowStrict(lastScrapeTime);
 
   return (
     <>
