@@ -33,13 +33,13 @@ export default async function getPolymarket(): Promise<Prediction> {
     let outcome: Outcome;
     let winnerPercentage: WinnerPercentage;
 
-    if (trumpPercentage === 50) {
+    if (trumpPercentage === harrisPercentage) {
       outcome = 'tie';
-      winnerPercentage = 50;
-    } else if (trumpPercentage > 50) {
+      winnerPercentage = trumpPercentage;
+    } else if (trumpPercentage > harrisPercentage) {
       outcome = 'republican';
       winnerPercentage = trumpPercentage;
-    } else if (trumpPercentage < 50) {
+    } else if (trumpPercentage < harrisPercentage) {
       outcome = 'democrat';
       winnerPercentage = harrisPercentage;
     } else {
