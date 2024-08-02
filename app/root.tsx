@@ -11,20 +11,6 @@ export const links: LinksFunction = () => {
       rel: 'stylesheet',
       href: mainCss,
     },
-    {
-      rel: 'preconnect',
-      href: 'https://fonts.googleapis.com',
-    },
-    {
-      rel: 'preconnect',
-      href: 'https://fonts.gstatic.com',
-      crossOrigin: 'anonymous',
-    },
-    {
-      rel: 'preload',
-      href: 'https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap',
-      as: 'style',
-    },
   ];
 };
 
@@ -34,6 +20,18 @@ export default function App() {
       <html lang="en">
         <head>
           <Links />
+
+          <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          ></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+          ></link>
+
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
