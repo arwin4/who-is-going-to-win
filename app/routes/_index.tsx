@@ -18,7 +18,10 @@ export async function loader() {
       'lastScrapeTime',
     );
 
-    return { forecasts, lastScrapeDoc };
+    const lastScrapeTime = new Date(lastScrapeDoc);
+    const lastUpdateText = formatDistanceToNowStrict(lastScrapeTime);
+
+    return { forecasts, lastUpdateText };
   } catch (err) {
     console.error('Unable to fetch forecasts from database');
     throw new Response('Unable to fetch forecasts from database', {
@@ -28,10 +31,7 @@ export async function loader() {
 }
 
 export default function Index() {
-  const { forecasts, lastScrapeDoc } = useLoaderData<typeof loader>();
-
-  // const lastScrapeTime = new Date(lastScrapeDoc);
-  // const lastUpdate = formatDistanceToNowStrict(lastScrapeTime);
+  const { forecasts, lastUpdateText } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -52,7 +52,9 @@ export default function Index() {
             alt="Information"
           />
         </Link>
-        {/* <div className="mt-2 text-sm opacity-80">Updated {lastUpdate} ago</div> */}
+        <div className="mt-2 text-sm opacity-80">
+          Updated {lastUpdateText} ago
+        </div>
       </div>
       <main className="m-4 mt-0 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">
         <div className="space-x-4 space-y-4 md:space-x-4">
