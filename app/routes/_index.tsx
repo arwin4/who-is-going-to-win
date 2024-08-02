@@ -6,7 +6,7 @@ import redis from '../utils/redis';
 import { formatDistanceToNowStrict } from 'date-fns';
 
 export const headers: HeadersFunction = () => ({
-  'Cache-Control': 's-maxage=1800, stale-while-revalidate=60',
+  'Cache-Control': 's-maxage=60, stale-while-revalidate=60',
 });
 
 export const config = { runtime: 'edge' };
