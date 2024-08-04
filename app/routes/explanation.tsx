@@ -18,14 +18,8 @@ export default function Explanation(): React.JSX.Element {
         </div>
         <div className="text-sm">
           * Nate Silver&apos;s forecast is behind a paywall. Therefore, its
-          prediction is updated manually only{' '}
-          <a
-            className="underline hover:text-gray-500 hover:decoration-gray-500"
-            href="https://www.natesilver.net/p/the-presidential-election-is-a-toss"
-          >
-            when Silver mentions its current prediction publicly
-          </a>
-          . To see the current prediction,{' '}
+          prediction is updated manually only when Silver mentions its current
+          prediction publicly. To see the current prediction,{' '}
           <a
             className="underline hover:text-gray-500 hover:decoration-gray-500"
             href="https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model"
