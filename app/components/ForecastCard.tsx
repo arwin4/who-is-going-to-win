@@ -70,7 +70,7 @@ function Disclaimer({ forecast }: { forecast: Forecast }) {
 
   return (
     <div className="text-sm opacity-75">
-      {isNateSilver && '(on Aug 4)'}
+      {isNateSilver && '(on Aug 5)'}
       {isPolymarket && '(betting market, not a model)'}
     </div>
   );
