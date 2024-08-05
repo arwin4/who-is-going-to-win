@@ -1,5 +1,5 @@
+import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
 import puppeteer from 'puppeteer';
-import { Outcome, Prediction, WinnerPercentage } from '../types';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 
 /**
@@ -42,7 +42,8 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
       outcome = 'tie';
       return {
         outcome,
-        percentage: 50,
+        repPercentage: 50,
+        demPercentage: 50,
       };
     }
 
@@ -57,32 +58,46 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
       throw new Error();
     }
 
-    let winnerPercentage: WinnerPercentage;
+    let demPercentage: DemPercentage;
+    let repPercentage: RepPercentage;
+
     if (parsedPercentage < 50) {
       if (candidate === 'democrat') {
+        // D 40
         outcome = 'republican';
+        repPercentage = 100 - parsedPercentage;
+        demPercentage = parsedPercentage;
       } else {
+        // R 40
         outcome = 'democrat';
+        demPercentage = 100 - parsedPercentage;
+        repPercentage = parsedPercentage;
       }
-      winnerPercentage = 100 - parsedPercentage;
     } else {
       if (candidate === 'democrat') {
+        // D 60
         outcome = 'democrat';
+        demPercentage = parsedPercentage;
+        repPercentage = 100 - parsedPercentage;
       } else {
+        // R 60
         outcome = 'republican';
+        repPercentage = parsedPercentage;
+        demPercentage = 100 - parsedPercentage;
       }
-      winnerPercentage = parsedPercentage;
     }
 
     return {
       outcome,
-      percentage: winnerPercentage,
+      repPercentage,
+      demPercentage,
     };
   } catch (err) {
     console.error('Unable to determine Economist prediction');
     return {
       outcome: 'unknown',
-      percentage: NaN,
+      repPercentage: NaN,
+      demPercentage: NaN,
     };
   }
 }

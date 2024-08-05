@@ -1,4 +1,4 @@
-import { Prediction, Outcome } from '../types';
+import { Prediction, Outcome, RepPercentage, DemPercentage } from '../types';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 import loadHtmlForScraping from './utils/loadHtmlForScraping';
 
@@ -7,13 +7,17 @@ export default async function scrapeFiveThirtyEight(): Promise<Prediction> {
     const url = 'https://projects.fivethirtyeight.com/2024-election-forecast/';
     const loadedDocument = await loadHtmlForScraping(url);
 
-    // Node is targeted by party in class name (republican)
     const repPredictionNode = loadedDocument('.rep.text-primary');
+    const demPredictionNode = loadedDocument('.dem.text-primary');
 
     // Extract the complete text content of the element
     const repPredictionString = repPredictionNode.text();
+    const demPredictionString = demPredictionNode.text();
 
-    const repPercentage = getPercentageFromString(repPredictionString);
+    const repPercentage: RepPercentage =
+      getPercentageFromString(repPredictionString);
+    const demPercentage: DemPercentage =
+      getPercentageFromString(demPredictionString);
 
     let outcome: Outcome;
 
@@ -29,13 +33,15 @@ export default async function scrapeFiveThirtyEight(): Promise<Prediction> {
 
     return {
       outcome,
-      percentage: repPercentage,
+      repPercentage,
+      demPercentage,
     };
   } catch (err) {
     console.error('Unable to determine 538 prediction');
     return {
       outcome: 'unknown',
-      percentage: NaN,
+      repPercentage: NaN,
+      demPercentage: NaN,
     };
   }
 }

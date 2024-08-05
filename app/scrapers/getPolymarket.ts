@@ -1,4 +1,4 @@
-import { Outcome, Prediction, WinnerPercentage } from '~/types';
+import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
 
 export default async function getPolymarket(): Promise<Prediction> {
   try {
@@ -31,30 +31,30 @@ export default async function getPolymarket(): Promise<Prediction> {
     const harrisPercentage = Math.round(harrisDecimalChance * 100);
 
     let outcome: Outcome;
-    let winnerPercentage: WinnerPercentage;
+    const demPercentage: DemPercentage = harrisPercentage;
+    const repPercentage: RepPercentage = trumpPercentage;
 
-    if (trumpPercentage === harrisPercentage) {
+    if (repPercentage === demPercentage) {
       outcome = 'tie';
-      winnerPercentage = trumpPercentage;
-    } else if (trumpPercentage > harrisPercentage) {
+    } else if (repPercentage > demPercentage) {
       outcome = 'republican';
-      winnerPercentage = trumpPercentage;
-    } else if (trumpPercentage < harrisPercentage) {
+    } else if (repPercentage < demPercentage) {
       outcome = 'democrat';
-      winnerPercentage = harrisPercentage;
     } else {
       throw new Error();
     }
 
     return {
       outcome,
-      percentage: winnerPercentage,
+      demPercentage,
+      repPercentage,
     };
   } catch (err) {
     console.error('Unable to determine Polymarket rate');
     return {
       outcome: 'unknown',
-      percentage: NaN,
+      demPercentage: NaN,
+      repPercentage: NaN,
     };
   }
 }

@@ -1,4 +1,4 @@
-import { Outcome, Prediction } from '../types';
+import { DemPercentage, Outcome, Prediction, RepPercentage } from '../types';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 import loadHtmlForScraping from './utils/loadHtmlForScraping';
 
@@ -19,25 +19,36 @@ export default async function scrapeTheHill(): Promise<Prediction> {
     const winnerPercentage = getPercentageFromString(fullPredictionString);
 
     let outcome: Outcome;
+    let demPercentage: DemPercentage;
+    let repPercentage: RepPercentage;
+
     if (winnerPercentage === 50) {
       outcome = 'tie';
+      repPercentage = 50;
+      demPercentage = 50;
     } else if (Number.isNaN(winnerPercentage)) {
       throw new Error();
     } else if (fullPredictionString.includes('Trump')) {
       outcome = 'republican';
+      repPercentage = winnerPercentage;
+      demPercentage = 100 - winnerPercentage;
     } else {
       outcome = 'democrat';
+      demPercentage = winnerPercentage;
+      repPercentage = 100 - winnerPercentage;
     }
 
     return {
       outcome,
-      percentage: winnerPercentage,
+      repPercentage,
+      demPercentage,
     };
   } catch (err) {
     console.error('Unable to determine The Hill prediction');
     return {
       outcome: 'unknown',
-      percentage: NaN,
+      repPercentage: NaN,
+      demPercentage: NaN,
     };
   }
 }

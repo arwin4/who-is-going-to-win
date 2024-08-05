@@ -1,16 +1,19 @@
 export type Outcome = 'democrat' | 'republican' | 'tie' | 'unknown';
-export type WinnerPercentage = number;
+export type DemPercentage = number;
+export type RepPercentage = number;
 
 export type Prediction = {
   outcome: Outcome;
-  percentage: WinnerPercentage;
+  demPercentage: DemPercentage;
+  repPercentage: RepPercentage;
 };
 
 export type Forecast = {
   _id: string;
   id: string;
   outcome: Outcome;
-  percentage: WinnerPercentage;
+  demPercentage: DemPercentage;
+  repPercentage: RepPercentage;
   formattedName: string;
   url: string;
 };

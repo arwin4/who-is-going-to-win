@@ -25,7 +25,8 @@ export default async function scrapeAndSave() {
         {
           $set: {
             outcome: theHillResult.outcome,
-            percentage: theHillResult.percentage,
+            demPercentage: theHillResult.demPercentage,
+            repPercentage: theHillResult.repPercentage,
           },
         },
       );
@@ -41,7 +42,8 @@ export default async function scrapeAndSave() {
         {
           $set: {
             outcome: fiveThirtyEightResult.outcome,
-            percentage: fiveThirtyEightResult.percentage,
+            demPercentage: fiveThirtyEightResult.demPercentage,
+            repPercentage: fiveThirtyEightResult.repPercentage,
           },
         },
       );
@@ -57,7 +59,8 @@ export default async function scrapeAndSave() {
         {
           $set: {
             outcome: theEconomistResult.outcome,
-            percentage: theEconomistResult.percentage,
+            demPercentage: theEconomistResult.demPercentage,
+            repPercentage: theEconomistResult.repPercentage,
           },
         },
       );
@@ -73,7 +76,8 @@ export default async function scrapeAndSave() {
         {
           $set: {
             outcome: polymarketResult.outcome,
-            percentage: polymarketResult.percentage,
+            demPercentage: polymarketResult.demPercentage,
+            repPercentage: polymarketResult.repPercentage,
           },
         },
       );
