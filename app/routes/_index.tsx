@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from '@remix-run/react';
 import ForecastCard from '../components/ForecastCard.js';
 import type { HeadersFunction } from '@vercel/remix';
-import type { Forecast } from '~/types';
+import type { Forecast, Forecasts } from '~/types';
 import redis from '../utils/redis';
 import { formatDistanceToNowStrict } from 'date-fns';
 
@@ -13,12 +13,12 @@ export const config = { runtime: 'edge' };
 
 export async function loader() {
   try {
-    const [forecasts, lastScrapeDoc] = await redis.mget(
+    const [forecasts, lastScrapeDoc] = await redis.mget<[Forecasts, string]>(
       'forecasts',
       'lastScrapeTime',
     );
 
-    const lastScrapeTime = new Date(lastScrapeDoc);
+    const lastScrapeTime = new Date(lastScrapeDoc as string);
     const lastUpdateText = formatDistanceToNowStrict(lastScrapeTime);
 
     return { forecasts, lastUpdateText };

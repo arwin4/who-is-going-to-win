@@ -18,6 +18,14 @@ export type Forecast = {
   url: string;
 };
 
+export type Forecasts = {
+  economist: Forecast;
+  fiveThirtyEight: Forecast;
+  nateSilver: Forecast;
+  polymarket: Forecast;
+  theHill: Forecast;
+};
+
 // https://stackoverflow.com/a/78174529/22857578
 export interface RouteError {
   data: string;

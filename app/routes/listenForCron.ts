@@ -32,7 +32,7 @@ async function getMongoDBData() {
   return { forecasts, lastScrapeTime };
 }
 
-export const loader = async ({ request }) => {
+export const loader = async ({ request }: { request: Request }) => {
   const authHeader = request.headers.get('Authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return false;
