@@ -6,7 +6,7 @@ export const config = { runtime: 'edge' };
 export default function Explanation(): React.JSX.Element {
   return (
     <>
-      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-5 text-center text-gray-600 shadow-lg">
+      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded bg-yellow-200 p-5 text-center text-gray-600 shadow-md">
         <div>
           This site displays an overview of the current forecasts for the 2024
           US presidential election,{' '}

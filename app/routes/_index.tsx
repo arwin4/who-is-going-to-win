@@ -56,8 +56,8 @@ export default function Index() {
           Updated {lastUpdateText} ago
         </div>
       </div>
-      <main className="m-4 mt-0 grid items-center gap-6 md:grid-flow-col md:space-x-4 md:space-y-0">
-        <div className="space-x-4 space-y-4 md:space-x-4">
+      <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col ">
+        <div className="grid gap-4">
           <ForecastCard
             forecast={forecasts.nateSilver as Forecast}
             isSuspended={false}
@@ -67,7 +67,7 @@ export default function Index() {
             isSuspended={false}
           />
         </div>
-        <div className="space-x-4 space-y-4 md:space-x-4">
+        <div className="grid gap-4">
           <ForecastCard
             forecast={forecasts.theHill as Forecast}
             isSuspended={true}

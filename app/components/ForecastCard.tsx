@@ -85,12 +85,10 @@ export default function ForecastCard({
 }) {
   return (
     <a href={forecast.url}>
-      <div
-        className={`grid space-y-3 rounded border-4 border-solid border-yellow-400 bg-yellow-200 p-4 text-center shadow-lg hover:bg-yellow-300 ${isSuspended && 'opacity-60'}`}
-      >
+      <div className="grid border-collapse space-y-3 rounded bg-yellow-200 p-5 text-center shadow-md hover:outline hover:outline-4 hover:outline-yellow-400">
         <h2 className="text-xl">{forecast.formattedName}</h2>
         {isSuspended ? (
-          <div className="mt-5 bg-gray-400 p-2">
+          <div className="mt-5 bg-gray-300/90 p-2">
             This forecast is currently suspended.
           </div>
         ) : (
