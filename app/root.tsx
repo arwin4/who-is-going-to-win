@@ -1,8 +1,8 @@
 import type { LinksFunction } from '@vercel/remix';
 
-import { Links, LiveReload, Outlet, Scripts } from '@remix-run/react';
+import { Links, Outlet, Scripts } from '@remix-run/react';
 
-import mainCss from './tailwind.css';
+import mainCss from './tailwind.css?url';
 import React from 'react';
 
 export const links: LinksFunction = () => {
@@ -40,7 +40,6 @@ export default function App() {
         <body className="m-0 flex min-h-screen flex-col place-items-center justify-center bg-slate-200 text-gray-800 md:gap-10">
           <Outlet />
           <Scripts />
-          <LiveReload />
         </body>
       </html>
     </React.StrictMode>
