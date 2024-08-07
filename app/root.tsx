@@ -1,5 +1,5 @@
 import type { LinksFunction } from '@vercel/remix';
-
+import { SpeedInsights } from '@vercel/speed-insights/remix';
 import { Links, Outlet, Scripts } from '@remix-run/react';
 
 import mainCss from './tailwind.css?url';
@@ -40,6 +40,7 @@ export default function App() {
         <body className="m-0 flex min-h-screen flex-col place-items-center justify-center bg-slate-200 text-gray-800 md:gap-10 dark:bg-slate-600 dark:text-gray-300">
           <Outlet />
           <Scripts />
+          <SpeedInsights />
         </body>
       </html>
     </React.StrictMode>
