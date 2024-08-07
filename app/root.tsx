@@ -37,7 +37,7 @@ export default function App() {
 
           <title>Who Is Going To Win?</title>
         </head>
-        <body className="m-0 flex min-h-screen flex-col place-items-center justify-center bg-slate-200 text-gray-800 md:gap-10">
+        <body className="m-0 flex min-h-screen flex-col place-items-center justify-center bg-slate-200 text-gray-800 md:gap-10 dark:bg-slate-600 dark:text-gray-300">
           <Outlet />
           <Scripts />
         </body>

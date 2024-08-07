@@ -32,7 +32,7 @@ function ForecastStat({
       <div
         className={
           isFavored
-            ? `text-2xl font-semibold ${favoredColor}`
+            ? `text-2xl font-semibold dark:text-gray-100 ${favoredColor}`
             : `text-2xl font-semibold`
         }
       >
@@ -85,7 +85,7 @@ export default function ForecastCard({
 }) {
   return (
     <a href={forecast.url}>
-      <div className="grid border-collapse space-y-3 rounded bg-slate-300 p-5 text-center shadow-md outline outline-2 outline-slate-400/60 hover:outline-slate-400">
+      <div className="grid border-collapse space-y-3 rounded bg-slate-300 p-5 text-center shadow-md outline outline-2 outline-slate-400/60 hover:outline-slate-400 dark:bg-slate-700">
         <h2 className="text-xl">{forecast.formattedName}</h2>
         {isSuspended ? (
           <div className="mt-5 p-2">This forecast is currently suspended.</div>

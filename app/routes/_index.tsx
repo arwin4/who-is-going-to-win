@@ -42,7 +42,7 @@ export default function Index() {
         <Link
           to="explanation"
           prefetch="render"
-          className="grid grid-flow-col bg-slate-300 px-4 py-1 hover:bg-slate-400/50"
+          className="grid grid-flow-col bg-slate-300 px-4 py-1 hover:bg-slate-400/50 dark:bg-slate-700"
           unstable_viewTransition
         >
           A presidential election forecast aggregator

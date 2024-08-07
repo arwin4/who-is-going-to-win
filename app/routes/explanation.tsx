@@ -6,7 +6,7 @@ export const config = { runtime: 'edge' };
 export default function Explanation(): React.JSX.Element {
   return (
     <>
-      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded bg-yellow-200 p-5 text-center text-gray-600 shadow-md">
+      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded bg-yellow-200 p-5 text-center text-gray-600 shadow-md dark:bg-slate-700 dark:text-gray-300">
         <div>
           This site displays an overview of the current forecasts for the 2024
           US presidential election,{' '}
@@ -36,7 +36,7 @@ export default function Explanation(): React.JSX.Element {
         </ul>
       </main>
       <Link
-        className="mb-4 text-lg font-semibold text-gray-600 underline hover:text-gray-500 hover:decoration-gray-500"
+        className="mb-4 text-lg font-semibold underline hover:text-gray-500 hover:decoration-gray-500"
         to="/"
         prefetch="render"
         unstable_viewTransition
