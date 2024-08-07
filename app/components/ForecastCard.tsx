@@ -69,7 +69,7 @@ function Disclaimer({ forecast }: { forecast: Forecast }) {
   if (!isNateSilver && !isPolymarket) return null;
 
   return (
-    <div className="text-sm opacity-75">
+    <div className="text-sm opacity-90">
       {isNateSilver && '(on Aug 5)'}
       {isPolymarket && '(betting market, not a model)'}
     </div>
@@ -85,12 +85,10 @@ export default function ForecastCard({
 }) {
   return (
     <a href={forecast.url}>
-      <div className="grid border-collapse space-y-3 rounded bg-yellow-200 p-5 text-center shadow-md hover:outline hover:outline-4 hover:outline-yellow-400">
+      <div className="grid border-collapse space-y-3 rounded bg-slate-300 p-5 text-center shadow-md outline outline-2 outline-slate-400/60 hover:outline-slate-400">
         <h2 className="text-xl">{forecast.formattedName}</h2>
         {isSuspended ? (
-          <div className="mt-5 bg-gray-300/90 p-2">
-            This forecast is currently suspended.
-          </div>
+          <div className="mt-5 p-2">This forecast is currently suspended.</div>
         ) : (
           <ForecastData forecast={forecast} />
         )}
