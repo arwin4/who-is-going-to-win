@@ -74,7 +74,7 @@ export default function Index() {
           />
           <ForecastCard
             forecast={forecasts.economist as Forecast}
-            isSuspended={true}
+            isSuspended={false}
           />
           <ForecastCard
             forecast={forecasts.fiveThirtyEight as Forecast}
