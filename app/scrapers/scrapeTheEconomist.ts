@@ -2,6 +2,8 @@ import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
 import puppeteer from 'puppeteer';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 
+// TODO: Update scraper after paywall change. Graph is no longer available.
+
 /**
  * Puppeteer is used because the winner percentage is contained within a graph
  * that uses JS. (Therefore, we can't just parse the HTML.)
@@ -88,7 +90,8 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
     }
 
     return {
-      outcome,
+      // Temporarily hardcode tie
+      outcome: 'tie',
       repPercentage,
       demPercentage,
     };
