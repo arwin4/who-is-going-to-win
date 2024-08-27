@@ -2,13 +2,14 @@ import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
 import puppeteer from 'puppeteer';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 
-// TODO: Update scraper after paywall change. Graph is no longer available.
-
 /**
  * Puppeteer is used because the winner percentage is contained within a graph
  * that uses JS. (Therefore, we can't just parse the HTML.)
  */
 export default async function scrapeTheEconomist(): Promise<Prediction> {
+  const username = process.env.ECONOMIST_USERNAME as string;
+  const password = process.env.ECONOMIST_PASSWORD as string;
+
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -18,11 +19,18 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
       'https://www.economist.com/interactive/us-2024-election/prediction-model/president',
     );
 
-    /**
-     *  NOTE: at the time of implementation, this selector contains the winner. It's
-     *  unknown whether it will still contain the winner if the prediction were to
-     *  flip.
-     */
+    await Promise.all([
+      page.waitForNavigation(),
+      page.click('div ::-p-text(Log in)'),
+    ]);
+
+    await page.waitForSelector('#input-6');
+    await page.focus('#input-6');
+    await page.keyboard.type(username);
+    await page.focus('#input-8');
+    await page.keyboard.type(password);
+    await page.keyboard.press('Enter');
+
     await page.waitForSelector('.svelte-h0zoai');
 
     const fullPredictionString = await page.evaluate(() => {
@@ -90,8 +98,7 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
     }
 
     return {
-      // Temporarily hardcode tie
-      outcome: 'tie',
+      outcome,
       repPercentage,
       demPercentage,
     };

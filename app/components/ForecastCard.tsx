@@ -27,18 +27,6 @@ function ForecastStat({
 
   const favoredColor = `-skew-y-1 ${outcomeColor} p-1`;
 
-  // Temporary hardcoded economist, need to update scraper
-  if (forecast.id === 'theEconomist') {
-    return (
-      <div className="grid grid-flow-col items-center gap-2 gap-y-1">
-        <div className="text-xl font-semibold">
-          1<span className="text-lg"> in </span>2
-        </div>
-        <CandidateBanner candidate={candidate}></CandidateBanner>
-      </div>
-    );
-  }
-
   return (
     <div className="grid grid-flow-col items-center gap-2 gap-y-1">
       <div
