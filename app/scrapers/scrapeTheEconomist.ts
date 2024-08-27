@@ -9,6 +9,8 @@ import { getPercentageFromString } from './utils/getPercentageFromString';
 export default async function scrapeTheEconomist(): Promise<Prediction> {
   const username = process.env.ECONOMIST_USERNAME as string;
   const password = process.env.ECONOMIST_PASSWORD as string;
+  console.log(username);
+  console.log(password);
 
   try {
     const browser = await puppeteer.launch();
@@ -42,6 +44,8 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
       )?.textContent;
     });
     await browser.close();
+
+    console.log('prediction:', fullPredictionString);
 
     if (!fullPredictionString) throw new Error();
 
