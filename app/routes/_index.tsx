@@ -78,7 +78,7 @@ export default function Index() {
           />
           <ForecastCard
             forecast={forecasts.fiveThirtyEight as Forecast}
-            isSuspended={true}
+            isSuspended={false}
           />
         </div>
       </main>
