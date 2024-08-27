@@ -110,6 +110,7 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
     };
   } catch (err) {
     console.error('Unable to determine Economist prediction');
+    console.error(err);
     return {
       outcome: 'unknown',
       repPercentage: NaN,
