@@ -8,7 +8,7 @@
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "postinstall": "node node_modules/puppeteer/install.js"
+    "postinstall": "npx puppeteer browsers install chrome"
   },
   "dependencies": {
     "@remix-run/node": "^2.11.1",
