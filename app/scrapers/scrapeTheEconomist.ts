@@ -21,6 +21,8 @@ export default async function scrapeTheEconomist(): Promise<Prediction> {
       'https://www.economist.com/interactive/us-2024-election/prediction-model/president',
     );
 
+    await page.waitForSelector('div ::-p-text(Log in)');
+
     await Promise.all([
       page.waitForNavigation(),
       page.click('div ::-p-text(Log in)'),
