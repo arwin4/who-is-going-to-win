@@ -72,10 +72,10 @@ export default function Index() {
             forecast={forecasts.theHill as Forecast}
             isSuspended={false}
           />
-          <ForecastCard
+          {/* <ForecastCard
             forecast={forecasts.economist as Forecast}
             isSuspended={false}
-          />
+          /> */}
           <ForecastCard
             forecast={forecasts.fiveThirtyEight as Forecast}
             isSuspended={false}
