@@ -2,6 +2,10 @@ import scrapeAndSave from '~/utils/scrapeAndSave';
 import redis from '../utils/redis';
 import mongoose from 'mongoose';
 
+export const config = {
+  maxDuration: 50,
+};
+
 async function getMongoDBData() {
   const collection = mongoose.connection.collection('test');
 
