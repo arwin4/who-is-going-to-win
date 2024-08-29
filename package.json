@@ -8,7 +8,7 @@
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "postinstall": "npx playwright install"
+    "postinstall": "npx playwright install --with-deps chromium"
   },
   "dependencies": {
     "@remix-run/node": "^2.11.1",
