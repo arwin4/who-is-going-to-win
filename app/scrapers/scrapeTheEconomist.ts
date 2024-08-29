@@ -1,12 +1,17 @@
 import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
-import playwright from 'playwright';
+import { chromium as playwright } from 'playwright-core';
+import chromium from '@sparticuz/chromium';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 
 async function getFullPredictionString() {
   const username = process.env.ECONOMIST_USERNAME as string;
   const password = process.env.ECONOMIST_PASSWORD as string;
 
-  const browser = await playwright.chromium.launch();
+  const browser = await playwright.launch({
+    args: chromium.args,
+    executablePath: await chromium.executablePath(),
+  });
+
   const page = await browser.newPage();
 
   // Navigate the page to a URL.
@@ -14,14 +19,11 @@ async function getFullPredictionString() {
     'https://www.economist.com/interactive/us-2024-election/prediction-model/president',
   );
 
-  // await page.waitForSelector('div ::-p-text(Log in)');
-
   const logInBtn = page
     .locator('[data-test-id="Masthead"]')
     .getByRole('link', { name: 'Log in' });
 
   await logInBtn.click();
-  // await page.waitForURL('https://myaccount.economist.com/s/login/**');
 
   await page.locator('#input-6').fill(username);
   await page.locator('#input-8').fill(password);
