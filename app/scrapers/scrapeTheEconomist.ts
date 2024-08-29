@@ -10,6 +10,7 @@ async function getFullPredictionString() {
   const browser = await playwright.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath(),
+    headless: true,
   });
 
   const page = await browser.newPage();
