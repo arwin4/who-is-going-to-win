@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "remix vite:dev",
-    "build": "remix vite:build && npx playwright install-deps",
+    "build": "remix vite:build",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint ."
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "postinstall": "npx playwright install"
   },
   "dependencies": {
     "@remix-run/node": "^2.11.1",
