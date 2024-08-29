@@ -70,15 +70,15 @@ export default function Index() {
         <div className="grid gap-4">
           <ForecastCard
             forecast={forecasts.theHill as Forecast}
-            isSuspended={true}
-          />
-          <ForecastCard
-            forecast={forecasts.economist as Forecast}
             isSuspended={false}
           />
+          {/* <ForecastCard
+            forecast={forecasts.economist as Forecast}
+            isSuspended={false}
+          /> */}
           <ForecastCard
             forecast={forecasts.fiveThirtyEight as Forecast}
-            isSuspended={true}
+            isSuspended={false}
           />
         </div>
       </main>
