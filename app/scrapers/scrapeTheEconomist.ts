@@ -7,6 +7,8 @@ async function getFullPredictionString() {
   const username = process.env.ECONOMIST_USERNAME as string;
   const password = process.env.ECONOMIST_PASSWORD as string;
 
+  console.log('Preparing to launch playwright browser');
+
   const browser = await playwright.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath(),
@@ -20,17 +22,25 @@ async function getFullPredictionString() {
     'https://www.economist.com/interactive/us-2024-election/prediction-model/president',
   );
 
+  console.log('Navigated to page');
+
   const logInBtn = page
     .locator('[data-test-id="Masthead"]')
     .getByRole('link', { name: 'Log in' });
 
   await logInBtn.click();
 
+  console.log('Clicked on Login button');
+
   await page.locator('#input-6').fill(username);
   await page.locator('#input-8').fill(password);
   await page.locator('#input-8').press('Enter');
 
+  console.log('Submitted login form');
+
   await page.locator('.svelte-h0zoai').isVisible();
+
+  console.log('Located target element');
 
   const fullPredictionString = await page
     .locator('tspan')
@@ -40,6 +50,9 @@ async function getFullPredictionString() {
     .textContent();
 
   await browser.close();
+
+  console.log('Closed browser');
+
   return fullPredictionString;
 }
 
