@@ -28,7 +28,8 @@ async function getFullPredictionString() {
     .locator('[data-test-id="Masthead"]')
     .getByRole('link', { name: 'Log in' });
 
-  await logInBtn.click();
+  // Use dispatchEvent to bypass possible cookie consent iframe
+  await logInBtn.dispatchEvent('click');
 
   console.log('Clicked on Login button');
 
