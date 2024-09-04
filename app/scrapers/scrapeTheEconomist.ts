@@ -11,7 +11,7 @@ async function getFullPredictionString() {
 
   const browser = await playwright.launch({
     args: chromium.args,
-    executablePath: await chromium.executablePath('/opt/chromium'),
+    executablePath: await chromium.executablePath(),
     headless: true,
   });
 
