@@ -1,6 +1,6 @@
 import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
 import { chromium as playwright } from 'playwright-core';
-import chromium from '@sparticuz/chromium';
+import chromium from '@sparticuz/chromium-min';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 
 async function getFullPredictionString() {
@@ -11,7 +11,7 @@ async function getFullPredictionString() {
 
   const browser = await playwright.launch({
     args: chromium.args,
-    executablePath: await chromium.executablePath(),
+    executablePath: await chromium.executablePath('/opt/chromium'),
     headless: true,
   });
 
