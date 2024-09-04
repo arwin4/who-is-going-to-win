@@ -44,11 +44,12 @@ async function getFullPredictionString() {
   console.log('Located target element');
 
   const fullPredictionString = await page
-    .locator('tspan')
-    .filter({ hasText: 'in 100' })
+    .getByText('in 100')
     .filter({ hasText: /^.{11}$/ }) // Assume chance% has two characters
     .first()
     .textContent();
+
+  console.log(fullPredictionString);
 
   await browser.close();
 

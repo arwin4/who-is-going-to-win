@@ -37,10 +37,10 @@ async function getMongoDBData() {
 }
 
 export const loader = async ({ request }: { request: Request }) => {
-  const authHeader = request.headers.get('Authorization');
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return false;
-  }
+  // const authHeader = request.headers.get('Authorization');
+  // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  //   return false;
+  // }
 
   try {
     await scrapeAndSave();
