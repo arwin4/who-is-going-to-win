@@ -7,10 +7,19 @@ import scrapeTheHill from '~/scrapers/scrapeTheHill';
 import getPolymarket from '~/scrapers/getPolymarket';
 
 export default async function scrapeAndSave() {
-  const theHillResult = await scrapeTheHill();
-  const fiveThirtyEightResult = await scrapeFiveThirtyEight();
-  const theEconomistResult = await scrapeTheEconomist();
-  const polymarketResult = await getPolymarket();
+  const [
+    theHillResult,
+    fiveThirtyEightResult,
+    theEconomistResult,
+    polymarketResult,
+  ] = await Promise.all([
+    await scrapeTheHill(),
+    await scrapeFiveThirtyEight(),
+    await scrapeTheEconomist(),
+    await getPolymarket(),
+  ]);
+
+  console.log('Completed scraping.');
 
   const connectionString = process.env.CONNECTION_STRING || '';
 
