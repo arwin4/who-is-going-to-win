@@ -51,9 +51,9 @@ async function getFullPredictionString() {
 
   console.log(fullPredictionString);
 
-  await browser.close();
+  // await browser.close();
 
-  console.log('Closed browser');
+  console.log('Skipped closing browser');
 
   return fullPredictionString;
 }
