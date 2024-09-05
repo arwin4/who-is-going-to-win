@@ -1,6 +1,6 @@
 import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
 import { chromium as playwright } from 'playwright-core';
-import chromium from '@sparticuz/chromium-min';
+import chromium from '@sparticuz/chromium';
 import { getPercentageFromString } from './utils/getPercentageFromString';
 
 async function getFullPredictionString() {
