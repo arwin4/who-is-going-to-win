@@ -51,15 +51,14 @@ async function getFullPredictionString() {
 
   console.log(fullPredictionString);
 
+  // We don't close the browser on Vercel, since this is slow and not necessary
   // await browser.close();
-
-  console.log('Skipped closing browser');
 
   return fullPredictionString;
 }
 
 /**
- * Puppeteer is used because the winner percentage is contained within a graph
+ * Playwright is used because the winner percentage is contained within a graph
  * that uses JS. (Therefore, we can't just parse the HTML.)
  */
 export default async function scrapeTheEconomist(): Promise<Prediction> {
