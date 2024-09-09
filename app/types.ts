@@ -24,6 +24,7 @@ export type Forecasts = {
   nateSilver: Forecast;
   polymarket: Forecast;
   theHill: Forecast;
+  raceToTheWH: Forecast;
 };
 
 // https://stackoverflow.com/a/78174529/22857578

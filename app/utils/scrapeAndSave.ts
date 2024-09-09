@@ -5,6 +5,7 @@ import scrapeFiveThirtyEight from '~/scrapers/scrapeFiveThirtyEight';
 import scrapeTheEconomist from '~/scrapers/scrapeTheEconomist';
 import scrapeTheHill from '~/scrapers/scrapeTheHill';
 import getPolymarket from '~/scrapers/getPolymarket';
+import scrapeRaceToTheWH from '~/scrapers/scrapeRaceToTheWH';
 
 export default async function scrapeAndSave() {
   const [
@@ -12,11 +13,13 @@ export default async function scrapeAndSave() {
     fiveThirtyEightResult,
     theEconomistResult,
     polymarketResult,
+    raceToTheWHResult,
   ] = await Promise.all([
     await scrapeTheHill(),
     await scrapeFiveThirtyEight(),
     await scrapeTheEconomist(),
     await getPolymarket(),
+    await scrapeRaceToTheWH(),
   ]);
 
   console.log('Completed scraping.');
@@ -92,6 +95,23 @@ export default async function scrapeAndSave() {
       );
     } catch (err) {
       console.error('Unable to update db with new Polymarket data');
+    }
+  }
+
+  if (raceToTheWHResult) {
+    try {
+      await collection.findOneAndUpdate(
+        { id: 'raceToTheWH' },
+        {
+          $set: {
+            outcome: raceToTheWHResult.outcome,
+            demPercentage: raceToTheWHResult.demPercentage,
+            repPercentage: raceToTheWHResult.repPercentage,
+          },
+        },
+      );
+    } catch (err) {
+      console.error('Unable to update db with new RaceToTheWH data');
     }
   }
 
