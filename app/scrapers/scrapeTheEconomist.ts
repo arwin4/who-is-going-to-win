@@ -1,7 +1,7 @@
 import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
 import { chromium as playwright } from 'playwright-core';
 import chromium from '@sparticuz/chromium';
-import { getPercentageFromString } from './utils/getPercentageFromString';
+import { getPercentageFromString } from '../utils/scrapers/getPercentageFromString';
 
 async function getFullPredictionString() {
   const username = process.env.ECONOMIST_USERNAME as string;

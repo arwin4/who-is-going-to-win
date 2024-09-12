@@ -7,6 +7,12 @@ import scrapeTheHill from '~/scrapers/scrapeTheHill';
 import getPolymarket from '~/scrapers/getPolymarket';
 import scrapeRaceToTheWH from '~/scrapers/scrapeRaceToTheWH';
 
+
+
+export const config = {
+  maxDuration: 60,
+};
+
 export default async function scrapeAndSave() {
   const [
     theHillResult,

@@ -1,6 +1,6 @@
-import { Prediction, Outcome, RepPercentage, DemPercentage } from '../types';
-import { getPercentageFromString } from '../utils/scrapers/getPercentageFromString';
-import loadHtmlForScraping from '../utils/scrapers/loadHtmlForScraping';
+import { getPercentageFromString } from '../../utils/scrapers/getPercentageFromString';
+import { Prediction, Outcome, RepPercentage, DemPercentage } from '../../types';
+import loadHtmlForScraping from '../../utils/scrapers/loadHtmlForScraping';
 
 export default async function scrapeFiveThirtyEight(): Promise<Prediction> {
   try {
@@ -45,3 +45,12 @@ export default async function scrapeFiveThirtyEight(): Promise<Prediction> {
     };
   }
 }
+
+async function update538() {
+  const 
+}
+
+// scrape
+// connect to mongo
+// update mongo data
+// update redis

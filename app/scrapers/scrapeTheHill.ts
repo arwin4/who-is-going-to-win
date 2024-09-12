@@ -1,6 +1,6 @@
 import { DemPercentage, Outcome, Prediction, RepPercentage } from '../types';
-import { getPercentageFromString } from './utils/getPercentageFromString';
-import loadHtmlForScraping from './utils/loadHtmlForScraping';
+import { getPercentageFromString } from '../utils/scrapers/getPercentageFromString';
+import loadHtmlForScraping from '../utils/scrapers/loadHtmlForScraping';
 
 export default async function scrapeTheHill(): Promise<Prediction> {
   try {
