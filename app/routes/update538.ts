@@ -6,10 +6,9 @@ export const config = {
 };
 
 export const loader = async ({ request }: { request: Request }) => {
-  // TODO: export auth
   const authHeader = request.headers.get('Authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return false;
+    return new Response('Not authorized', { status: 403 });
   }
 
   try {
