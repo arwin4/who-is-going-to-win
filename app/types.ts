@@ -1,6 +1,13 @@
 export type Outcome = 'democrat' | 'republican' | 'tie' | 'unknown';
 export type DemPercentage = number;
 export type RepPercentage = number;
+export type Source =
+  | '538'
+  | 'polymarket'
+  | 'raceToTheWH'
+  | 'economist'
+  | 'theHill'
+  | 'nateSilver';
 
 export type Prediction = {
   outcome: Outcome;
@@ -26,6 +33,8 @@ export type Forecasts = {
   theHill: Forecast;
   raceToTheWH: Forecast;
 };
+
+export type ScrapingFunction = () => Promise<Prediction>;
 
 // https://stackoverflow.com/a/78174529/22857578
 export interface RouteError {

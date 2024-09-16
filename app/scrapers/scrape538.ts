@@ -1,8 +1,13 @@
-import { getPercentageFromString } from '../../utils/scrapers/getPercentageFromString';
-import { Prediction, Outcome, RepPercentage, DemPercentage } from '../../types';
-import loadHtmlForScraping from '../../utils/scrapers/loadHtmlForScraping';
+import {
+  DemPercentage,
+  Outcome,
+  RepPercentage,
+  ScrapingFunction,
+} from '~/types';
+import { getPercentageFromString } from '~/utils/scrapers/getPercentageFromString';
+import loadHtmlForScraping from '~/utils/scrapers/loadHtmlForScraping';
 
-export default async function scrapeFiveThirtyEight(): Promise<Prediction> {
+const scrape538: ScrapingFunction = async () => {
   try {
     const url = 'https://projects.fivethirtyeight.com/2024-election-forecast/';
     const loadedDocument = await loadHtmlForScraping(url);
@@ -44,13 +49,6 @@ export default async function scrapeFiveThirtyEight(): Promise<Prediction> {
       demPercentage: NaN,
     };
   }
-}
+};
 
-async function update538() {
-  const 
-}
-
-// scrape
-// connect to mongo
-// update mongo data
-// update redis
+export default scrape538;
