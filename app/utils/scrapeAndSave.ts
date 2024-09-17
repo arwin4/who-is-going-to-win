@@ -2,12 +2,10 @@ import mongoose from 'mongoose';
 
 // Scrapers
 import scrapeFiveThirtyEight from '~/scrapers/scrapeFiveThirtyEight';
-import scrapeTheEconomist from '~/scrapers/scrapeTheEconomist';
+import scrapeEconomist from '~/scrapers/scrapeEconomist';
 import scrapeTheHill from '~/scrapers/scrapeTheHill';
 import getPolymarket from '~/scrapers/getPolymarket';
 import scrapeRaceToTheWH from '~/scrapers/scrapeRaceToTheWH';
-
-
 
 export const config = {
   maxDuration: 60,
@@ -23,7 +21,7 @@ export default async function scrapeAndSave() {
   ] = await Promise.all([
     await scrapeTheHill(),
     await scrapeFiveThirtyEight(),
-    await scrapeTheEconomist(),
+    await scrapeEconomist(),
     await getPolymarket(),
     await scrapeRaceToTheWH(),
   ]);
