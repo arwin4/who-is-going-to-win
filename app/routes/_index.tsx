@@ -3,6 +3,7 @@ import ForecastCard from '../components/ForecastCard.js';
 import type { HeadersFunction } from '@vercel/remix';
 import type { Forecast } from '~/types';
 import redis from '../utils/redis';
+import { formatDistanceToNowStrict } from 'date-fns';
 
 export const headers: HeadersFunction = () => ({
   'Cache-Control': 's-maxage=60, stale-while-revalidate=60',
@@ -22,6 +23,26 @@ export async function loader() {
     ] = await redis.mget<
       [Forecast, Forecast, Forecast, Forecast, Forecast, Forecast]
     >('538', 'economist', 'polymarket', 'raceToTheWH', 'theHill', 'nateSilver');
+
+    // Format timestamps server-side
+    fiveThirtyEight.lastUpdateText = formatDistanceToNowStrict(
+      new Date(fiveThirtyEight.lastUpdate),
+    );
+    economist.lastUpdateText = formatDistanceToNowStrict(
+      new Date(economist.lastUpdate),
+    );
+    polymarket.lastUpdateText = formatDistanceToNowStrict(
+      new Date(polymarket.lastUpdate),
+    );
+    raceToTheWH.lastUpdateText = formatDistanceToNowStrict(
+      new Date(raceToTheWH.lastUpdate),
+    );
+    theHill.lastUpdateText = formatDistanceToNowStrict(
+      new Date(theHill.lastUpdate),
+    );
+    nateSilver.lastUpdateText = formatDistanceToNowStrict(
+      new Date(nateSilver.lastUpdate),
+    );
 
     return {
       fiveThirtyEight,

@@ -24,6 +24,7 @@ export type Forecast = {
   formattedName: string;
   url: string;
   lastUpdate: string;
+  lastUpdateText: string;
 };
 
 export type Forecasts = {

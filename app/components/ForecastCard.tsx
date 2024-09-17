@@ -48,9 +48,6 @@ function ForecastStat({
 }
 
 function ForecastData({ forecast }: { forecast: Forecast }) {
-  const lastScrapeTime = new Date(forecast.lastUpdate);
-  const lastUpdateText = formatDistanceToNowStrict(lastScrapeTime);
-
   if (forecast.outcome === 'unknown') {
     return <div className="">There was an error getting this forecast. </div>;
   }
@@ -62,7 +59,9 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
         <div>—</div>
         <ForecastStat candidate="republican" forecast={forecast} />
       </div>
-      <div className="mt-1 text-sm opacity-80">{lastUpdateText} ago</div>{' '}
+      <div className="mt-1 text-sm opacity-80">
+        {forecast.lastUpdateText} ago
+      </div>
     </>
   );
 }
