@@ -116,8 +116,8 @@ export default function Index() {
             forecast={raceToTheWH as Forecast}
             isSuspended={false}
           />
-          <ForecastCard forecast={polymarket as Forecast} isSuspended={false} />
           <ForecastCard forecast={nateSilver as Forecast} isSuspended={false} />
+          <ForecastCard forecast={polymarket as Forecast} isSuspended={false} />
         </div>
       </main>
     </>
