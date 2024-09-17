@@ -1,6 +1,11 @@
-import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
+import {
+  DemPercentage,
+  RepPercentage,
+  Outcome,
+  ScrapingFunction,
+} from './../types';
 
-export default async function getPolymarket(): Promise<Prediction> {
+const getPolymarket: ScrapingFunction = async () => {
   try {
     const trumpUrl =
       'https://gamma-api.polymarket.com/markets?slug=will-donald-trump-win-the-2024-us-presidential-election&limit=1';
@@ -57,4 +62,6 @@ export default async function getPolymarket(): Promise<Prediction> {
       repPercentage: NaN,
     };
   }
-}
+};
+
+export default getPolymarket;
