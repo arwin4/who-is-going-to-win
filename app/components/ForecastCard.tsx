@@ -1,4 +1,3 @@
-import { formatDistanceToNowStrict } from 'date-fns';
 import type { Forecast } from '~/types';
 
 function CandidateBanner({ candidate }: { candidate: string }) {
