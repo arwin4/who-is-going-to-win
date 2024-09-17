@@ -1,4 +1,9 @@
-import { DemPercentage, RepPercentage, Outcome, Prediction } from './../types';
+import {
+  DemPercentage,
+  RepPercentage,
+  Outcome,
+  ScrapingFunction,
+} from './../types';
 import { chromium as playwright } from 'playwright-core';
 import chromium from '@sparticuz/chromium';
 import { getPercentageFromString } from '../utils/scrapers/getPercentageFromString';
@@ -33,7 +38,7 @@ async function getPredictions() {
  * Playwright is used because the winner percentage is contained within a graph
  * that uses JS. (Therefore, we can't just parse the HTML.)
  */
-export default async function scrapeRaceToTheWH(): Promise<Prediction> {
+const scrapeRaceToTheWH: ScrapingFunction = async () => {
   try {
     const fullPredictionsStrings = await getPredictions();
 
@@ -73,4 +78,6 @@ export default async function scrapeRaceToTheWH(): Promise<Prediction> {
       demPercentage: NaN,
     };
   }
-}
+};
+
+export default scrapeRaceToTheWH;
