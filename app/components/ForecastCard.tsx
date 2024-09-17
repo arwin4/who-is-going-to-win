@@ -66,7 +66,7 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
 }
 
 function Disclaimer({ forecast }: { forecast: Forecast }) {
-  const isPolymarket = forecast.id === 'polymarket';
+  const isPolymarket = forecast.formattedName === 'Polymarket';
 
   if (!isPolymarket) return null;
 
