@@ -11,6 +11,11 @@ export const headers: HeadersFunction = () => ({
 
 export const config = { runtime: 'edge' };
 
+function getTimestampAsText(dateAsString: string) {
+  const dateAsDate = new Date(dateAsString);
+  return formatDistanceToNowStrict(dateAsDate);
+}
+
 export async function loader() {
   try {
     const [
@@ -20,29 +25,36 @@ export async function loader() {
       raceToTheWH,
       theHill,
       nateSilver,
-    ] = await redis.mget<
-      [Forecast, Forecast, Forecast, Forecast, Forecast, Forecast]
-    >('538', 'economist', 'polymarket', 'raceToTheWH', 'theHill', 'nateSilver');
+    ] = await Promise.all([
+      await redis.hgetall<Forecast>('538'),
+      await redis.hgetall<Forecast>('economist'),
+      await redis.hgetall<Forecast>('polymarket'),
+      await redis.hgetall<Forecast>('raceToTheWH'),
+      await redis.hgetall<Forecast>('theHill'),
+      await redis.hgetall<Forecast>('nateSilver'),
+    ]);
 
     // Format timestamps server-side
-    fiveThirtyEight.lastUpdateText = formatDistanceToNowStrict(
-      new Date(fiveThirtyEight.lastUpdate),
-    );
-    economist.lastUpdateText = formatDistanceToNowStrict(
-      new Date(economist.lastUpdate),
-    );
-    polymarket.lastUpdateText = formatDistanceToNowStrict(
-      new Date(polymarket.lastUpdate),
-    );
-    raceToTheWH.lastUpdateText = formatDistanceToNowStrict(
-      new Date(raceToTheWH.lastUpdate),
-    );
-    theHill.lastUpdateText = formatDistanceToNowStrict(
-      new Date(theHill.lastUpdate),
-    );
-    nateSilver.lastUpdateText = formatDistanceToNowStrict(
-      new Date(nateSilver.lastUpdate),
-    );
+    if (fiveThirtyEight) {
+      fiveThirtyEight.lastUpdateText = getTimestampAsText(
+        fiveThirtyEight.lastUpdate,
+      );
+    }
+    if (economist) {
+      economist.lastUpdateText = getTimestampAsText(economist.lastUpdate);
+    }
+    if (polymarket) {
+      polymarket.lastUpdateText = getTimestampAsText(polymarket.lastUpdate);
+    }
+    if (raceToTheWH) {
+      raceToTheWH.lastUpdateText = getTimestampAsText(raceToTheWH.lastUpdate);
+    }
+    if (theHill) {
+      theHill.lastUpdateText = getTimestampAsText(theHill.lastUpdate);
+    }
+    if (nateSilver) {
+      nateSilver.lastUpdateText = getTimestampAsText(nateSilver.lastUpdate);
+    }
 
     return {
       fiveThirtyEight,
@@ -92,14 +104,20 @@ export default function Index() {
       </div>
       <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col ">
         <div className="grid gap-4">
-          <ForecastCard forecast={theHill} isSuspended={false} />
-          <ForecastCard forecast={economist} isSuspended={false} />
-          <ForecastCard forecast={fiveThirtyEight} isSuspended={false} />
+          <ForecastCard forecast={theHill as Forecast} isSuspended={false} />
+          <ForecastCard forecast={economist as Forecast} isSuspended={false} />
+          <ForecastCard
+            forecast={fiveThirtyEight as Forecast}
+            isSuspended={false}
+          />
         </div>
         <div className="grid gap-4">
-          <ForecastCard forecast={raceToTheWH} isSuspended={false} />
-          <ForecastCard forecast={polymarket} isSuspended={false} />
-          <ForecastCard forecast={nateSilver} isSuspended={false} />
+          <ForecastCard
+            forecast={raceToTheWH as Forecast}
+            isSuspended={false}
+          />
+          <ForecastCard forecast={polymarket as Forecast} isSuspended={false} />
+          <ForecastCard forecast={nateSilver as Forecast} isSuspended={false} />
         </div>
       </main>
     </>

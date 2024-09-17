@@ -1,10 +1,4 @@
 import { ScrapingFunction, Source } from '~/types';
-import {
-  connectToMongoDB,
-  disconnectMongoDB,
-  findForecast,
-  updatePredictionInMongoDB,
-} from './scrapers/mongoManager';
 import redis from './redis';
 
 export default async function updatePrediction(
@@ -12,14 +6,14 @@ export default async function updatePrediction(
   scraper: ScrapingFunction,
 ) {
   try {
-    await connectToMongoDB();
+    console.log(`Updating ${source}...`);
+
     const prediction = await scraper();
-    await updatePredictionInMongoDB(prediction, source);
-    const forecast = await findForecast(source);
-    await redis.set(source, JSON.stringify(forecast));
+    await redis.hset(source, {
+      ...prediction,
+      lastUpdate: new Date(),
+    });
   } catch (error) {
     console.error(`Failed to update ${source}`);
-  } finally {
-    await disconnectMongoDB();
   }
 }
