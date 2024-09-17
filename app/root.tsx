@@ -4,6 +4,7 @@ import { Links, Outlet, Scripts } from '@remix-run/react';
 
 import mainCss from './tailwind.css?url';
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 export const links: LinksFunction = () => {
   return [
@@ -41,6 +42,7 @@ export default function App() {
           <Outlet />
           <Scripts />
           <SpeedInsights />
+          <Analytics />
         </body>
       </html>
     </React.StrictMode>
