@@ -6,15 +6,16 @@ export const config = { runtime: 'edge' };
 export default function Explanation(): React.JSX.Element {
   return (
     <>
-      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded bg-yellow-200 p-5 text-center text-gray-600 shadow-md dark:bg-slate-700 dark:text-gray-300">
+      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded bg-slate-300 p-5 text-center text-gray-600 shadow-md dark:bg-slate-700 dark:text-gray-300">
         <div>
-          This site displays an overview of the current forecasts for the 2024
-          US presidential election,{' '}
+          This site displays an overview of the current forecast models for the
+          2024 US presidential election,{' '}
           <span className="font-semibold">refreshed every hour</span>.
         </div>
         <div>
           The information is provided as a quick reference only. Please click on
-          a forecast&apos;s card to see details and methodology.
+          a forecast&apos;s card to dive into its details and methodology. The
+          inclusion of a given forecast is not an endorsement.
         </div>
         <ul className="grid list-inside list-disc gap-1 text-sm">
           <li>
