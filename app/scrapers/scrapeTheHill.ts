@@ -1,8 +1,13 @@
-import { DemPercentage, Outcome, Prediction, RepPercentage } from '../types';
+import {
+  DemPercentage,
+  Outcome,
+  RepPercentage,
+  ScrapingFunction,
+} from '../types';
 import { getPercentageFromString } from '../utils/scrapers/getPercentageFromString';
 import loadHtmlForScraping from '../utils/scrapers/loadHtmlForScraping';
 
-export default async function scrapeTheHill(): Promise<Prediction> {
+const scrapeTheHill: ScrapingFunction = async () => {
   try {
     const url = 'https://elections2024.thehill.com/forecast/2024/president/';
     const loadedDocument = await loadHtmlForScraping(url);
@@ -51,4 +56,6 @@ export default async function scrapeTheHill(): Promise<Prediction> {
       demPercentage: NaN,
     };
   }
-}
+};
+
+export default scrapeTheHill;
