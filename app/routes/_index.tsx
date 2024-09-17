@@ -94,7 +94,7 @@ export default function Index() {
           className="grid grid-flow-col bg-slate-300 px-4 py-1 hover:bg-slate-400/50 dark:bg-slate-700"
           unstable_viewTransition
         >
-          A presidential election forecast aggregator
+          Predictions &mdash; not polling averages
           <img
             src="assets/info-icon.svg"
             className="w-7 self-center pl-2"

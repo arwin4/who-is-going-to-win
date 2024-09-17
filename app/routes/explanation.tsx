@@ -10,7 +10,8 @@ export default function Explanation(): React.JSX.Element {
         <div>
           This site displays an overview of the current forecast models for the
           2024 US presidential election,{' '}
-          <span className="font-semibold">refreshed every hour</span>.
+          <span className="font-semibold">refreshed every hour</span>. These
+          models attempt to predict the outcome on election day.
         </div>
         <div>
           The information is provided as a quick reference only. Please click on
