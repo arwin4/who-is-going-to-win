@@ -1,3 +1,4 @@
+import { formatDistanceToNowStrict } from 'date-fns';
 import type { Forecast } from '~/types';
 
 function CandidateBanner({ candidate }: { candidate: string }) {
@@ -47,6 +48,9 @@ function ForecastStat({
 }
 
 function ForecastData({ forecast }: { forecast: Forecast }) {
+  const lastScrapeTime = new Date(forecast.lastUpdate);
+  const lastUpdateText = formatDistanceToNowStrict(lastScrapeTime);
+
   if (forecast.outcome === 'unknown') {
     return <div className="">There was an error getting this forecast. </div>;
   }
@@ -58,19 +62,18 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
         <div>—</div>
         <ForecastStat candidate="republican" forecast={forecast} />
       </div>
+      <div className="mt-1 text-sm opacity-80">{lastUpdateText} ago</div>{' '}
     </>
   );
 }
 
 function Disclaimer({ forecast }: { forecast: Forecast }) {
-  const isNateSilver = forecast.id === 'nateSilver';
   const isPolymarket = forecast.id === 'polymarket';
 
-  if (!isNateSilver && !isPolymarket) return null;
+  if (!isPolymarket) return null;
 
   return (
     <div className="text-sm opacity-90">
-      {isNateSilver && '(on Sept 10)'}
       {isPolymarket && '(betting market, not a model)'}
     </div>
   );

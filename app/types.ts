@@ -23,6 +23,7 @@ export type Forecast = {
   repPercentage: RepPercentage;
   formattedName: string;
   url: string;
+  lastUpdate: string;
 };
 
 export type Forecasts = {
