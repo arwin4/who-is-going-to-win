@@ -1,9 +1,8 @@
 import { Link, useLoaderData } from '@remix-run/react';
 import ForecastCard from '../components/ForecastCard.js';
 import type { HeadersFunction } from '@vercel/remix';
-import type { Forecast, Forecasts } from '~/types';
+import type { Forecast } from '~/types';
 import redis from '../utils/redis';
-import { formatDistanceToNowStrict } from 'date-fns';
 
 export const headers: HeadersFunction = () => ({
   'Cache-Control': 's-maxage=60, stale-while-revalidate=60',
@@ -13,15 +12,25 @@ export const config = { runtime: 'edge' };
 
 export async function loader() {
   try {
-    const [forecasts, lastScrapeDoc] = await redis.mget<[Forecasts, string]>(
-      'forecasts',
-      'lastScrapeTime',
-    );
+    const [
+      fiveThirtyEight,
+      economist,
+      polymarket,
+      raceToTheWH,
+      theHill,
+      nateSilver,
+    ] = await redis.mget<
+      [Forecast, Forecast, Forecast, Forecast, Forecast, Forecast]
+    >('538', 'economist', 'polymarket', 'raceToTheWH', 'theHill', 'nateSilver');
 
-    const lastScrapeTime = new Date(lastScrapeDoc as string);
-    const lastUpdateText = formatDistanceToNowStrict(lastScrapeTime);
-
-    return { forecasts, lastUpdateText };
+    return {
+      fiveThirtyEight,
+      economist,
+      polymarket,
+      raceToTheWH,
+      theHill,
+      nateSilver,
+    };
   } catch (err) {
     console.error('Unable to fetch forecasts from database');
     throw new Response('Unable to fetch forecasts from database', {
@@ -31,7 +40,14 @@ export async function loader() {
 }
 
 export default function Index() {
-  const { forecasts, lastUpdateText } = useLoaderData<typeof loader>();
+  const {
+    fiveThirtyEight,
+    economist,
+    polymarket,
+    raceToTheWH,
+    theHill,
+    nateSilver,
+  } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -52,38 +68,17 @@ export default function Index() {
             alt="Information"
           />
         </Link>
-        <div className="mt-2 text-sm opacity-80">
-          Updated {lastUpdateText} ago
-        </div>
       </div>
       <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col ">
         <div className="grid gap-4">
-          <ForecastCard
-            forecast={forecasts.theHill as Forecast}
-            isSuspended={false}
-          />
-          <ForecastCard
-            forecast={forecasts.economist as Forecast}
-            isSuspended={false}
-          />
-          <ForecastCard
-            forecast={forecasts.fiveThirtyEight as Forecast}
-            isSuspended={false}
-          />
+          <ForecastCard forecast={theHill} isSuspended={false} />
+          <ForecastCard forecast={economist} isSuspended={false} />
+          <ForecastCard forecast={fiveThirtyEight} isSuspended={false} />
         </div>
         <div className="grid gap-4">
-          <ForecastCard
-            forecast={forecasts.raceToTheWH as Forecast}
-            isSuspended={false}
-          />
-          <ForecastCard
-            forecast={forecasts.polymarket as Forecast}
-            isSuspended={false}
-          />
-          <ForecastCard
-            forecast={forecasts.nateSilver as Forecast}
-            isSuspended={false}
-          />
+          <ForecastCard forecast={raceToTheWH} isSuspended={false} />
+          <ForecastCard forecast={polymarket} isSuspended={false} />
+          <ForecastCard forecast={nateSilver} isSuspended={false} />
         </div>
       </main>
     </>
