@@ -1,9 +1,14 @@
 import scrape538 from '~/scrapers/scrape538';
+import { ScrapingFunction, Source } from '~/types';
 import updatePrediction from '~/utils/updatePrediction';
 
 export const config = {
   maxDuration: 60,
 };
+
+// Configure source here
+const source: Source = '538';
+const scraper: ScrapingFunction = scrape538;
 
 export const loader = async ({ request }: { request: Request }) => {
   const authHeader = request.headers.get('Authorization');
@@ -12,11 +17,11 @@ export const loader = async ({ request }: { request: Request }) => {
   }
 
   try {
-    await updatePrediction('538', scrape538);
+    await updatePrediction(source, scraper);
     // TODO: change to proper response and status code
     return true;
   } catch (error) {
-    console.error(`Failed to update 538`);
+    console.error(`Failed to update ${source}`);
     return false;
   }
 };
