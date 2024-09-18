@@ -104,20 +104,14 @@ export default function Index() {
       </div>
       <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col ">
         <div className="grid gap-4">
-          <ForecastCard forecast={theHill as Forecast} isSuspended={false} />
-          <ForecastCard forecast={economist as Forecast} isSuspended={false} />
-          <ForecastCard
-            forecast={fiveThirtyEight as Forecast}
-            isSuspended={false}
-          />
+          <ForecastCard forecast={theHill as Forecast} />
+          <ForecastCard forecast={economist as Forecast} />
+          <ForecastCard forecast={fiveThirtyEight as Forecast} />
         </div>
         <div className="grid gap-4">
-          <ForecastCard
-            forecast={raceToTheWH as Forecast}
-            isSuspended={false}
-          />
-          <ForecastCard forecast={nateSilver as Forecast} isSuspended={false} />
-          <ForecastCard forecast={polymarket as Forecast} isSuspended={false} />
+          <ForecastCard forecast={raceToTheWH as Forecast} />
+          <ForecastCard forecast={nateSilver as Forecast} />
+          <ForecastCard forecast={polymarket as Forecast} />
         </div>
       </main>
     </>
