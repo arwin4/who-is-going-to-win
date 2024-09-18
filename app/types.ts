@@ -16,15 +16,13 @@ export type Prediction = {
 };
 
 export type Forecast = {
-  _id: string;
-  id: string;
   outcome: Outcome;
   demPercentage: DemPercentage;
   repPercentage: RepPercentage;
   formattedName: string;
   url: string;
   lastUpdate: string;
-  lastUpdateText: string;
+  lastUpdateText?: string;
 };
 
 export type Forecasts = {
