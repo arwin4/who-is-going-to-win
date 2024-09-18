@@ -41,8 +41,19 @@ export default function App() {
         <body className="m-0 flex min-h-screen flex-col place-items-center justify-center bg-slate-200 text-gray-800 md:gap-6 dark:bg-slate-600 dark:text-gray-300">
           <Outlet />
           <Scripts />
+
+          {/* Vercel Speed Insights */}
           <SpeedInsights />
+
+          {/* Vercel Analytics */}
           <Analytics />
+
+          {/* Cloudflare Web Analytics */}
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "0f4db6fca6cd4683a1040d53503ddf4f"}'
+          ></script>
         </body>
       </html>
     </React.StrictMode>
