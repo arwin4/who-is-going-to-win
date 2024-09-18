@@ -7,7 +7,8 @@
     "build": "remix vite:build",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint ."
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "setup-redis": "node ./scripts/setupRedis.js"
   },
   "dependencies": {
     "@remix-run/node": "^2.11.1",
@@ -31,6 +32,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.20",
+    "dotenv": "^16.4.5",
     "eslint": "^8.0.0",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "postcss": "^8.4.41",
