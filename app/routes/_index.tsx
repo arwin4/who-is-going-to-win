@@ -18,14 +18,7 @@ function getTimestampAsText(dateAsString: string) {
 
 export async function loader() {
   try {
-    const [
-      fiveThirtyEight,
-      economist,
-      polymarket,
-      raceToTheWH,
-      theHill,
-      nateSilver,
-    ] = await Promise.all([
+    const forecasts = await Promise.all([
       await redis.hgetall<Forecast>('538'),
       await redis.hgetall<Forecast>('economist'),
       await redis.hgetall<Forecast>('polymarket'),
@@ -34,53 +27,28 @@ export async function loader() {
       await redis.hgetall<Forecast>('nateSilver'),
     ]);
 
-    // Format timestamps server-side
-    if (fiveThirtyEight) {
-      fiveThirtyEight.lastUpdateText = getTimestampAsText(
-        fiveThirtyEight.lastUpdate,
-      );
-    }
-    if (economist) {
-      economist.lastUpdateText = getTimestampAsText(economist.lastUpdate);
-    }
-    if (polymarket) {
-      polymarket.lastUpdateText = getTimestampAsText(polymarket.lastUpdate);
-    }
-    if (raceToTheWH) {
-      raceToTheWH.lastUpdateText = getTimestampAsText(raceToTheWH.lastUpdate);
-    }
-    if (theHill) {
-      theHill.lastUpdateText = getTimestampAsText(theHill.lastUpdate);
-    }
-    if (nateSilver) {
-      nateSilver.lastUpdateText = getTimestampAsText(nateSilver.lastUpdate);
-    }
+    forecasts.map((forecast) => {
+      if (!forecast) throw new Error();
+      forecast.lastUpdateText = getTimestampAsText(forecast.lastUpdate);
+    });
 
-    return {
-      fiveThirtyEight,
-      economist,
-      polymarket,
-      raceToTheWH,
-      theHill,
-      nateSilver,
-    };
+    return forecasts;
   } catch (err) {
-    console.error('Unable to fetch forecasts from database');
-    throw new Response('Unable to fetch forecasts from database', {
+    throw new Response('Unable to fetch (all) forecasts from database', {
       status: 500,
     });
   }
 }
 
 export default function Index() {
-  const {
+  const [
     fiveThirtyEight,
     economist,
     polymarket,
     raceToTheWH,
     theHill,
     nateSilver,
-  } = useLoaderData<typeof loader>();
+  ] = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -104,6 +72,7 @@ export default function Index() {
       </div>
       <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col ">
         <div className="grid gap-4">
+          {/* FIXME: find a way to forgo type assertion */}
           <ForecastCard forecast={theHill as Forecast} />
           <ForecastCard forecast={economist as Forecast} />
           <ForecastCard forecast={fiveThirtyEight as Forecast} />
