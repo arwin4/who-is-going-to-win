@@ -65,13 +65,13 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
 }
 
 function Disclaimer({ forecast }: { forecast: Forecast }) {
-  const isPolymarket = forecast.formattedName === 'Polymarket';
+  const isEBO = forecast.formattedName === 'Election Betting Odds';
 
-  if (!isPolymarket) return null;
+  if (!isEBO) return null;
 
   return (
     <div className="text-sm opacity-90">
-      {isPolymarket && '(betting market, not a model)'}
+      {isEBO && '(betting odds, not a model)'}
     </div>
   );
 }

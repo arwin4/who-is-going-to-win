@@ -1,4 +1,4 @@
-import getPolymarket from '~/scrapers/getPolymarket';
+import scrapeEBO from '~/scrapers/scrapeEBO';
 import { ScrapingFunction, Source } from '~/types';
 import updatePrediction from '~/utils/updatePrediction';
 
@@ -7,8 +7,8 @@ export const config = {
 };
 
 // Configure source here
-const source: Source = 'polymarket';
-const scraper: ScrapingFunction = getPolymarket;
+const source: Source = 'EBO';
+const scraper: ScrapingFunction = scrapeEBO;
 
 export const loader = async ({ request }: { request: Request }) => {
   if (process.env.NODE_ENV === 'production') {

@@ -47,7 +47,7 @@ At this point, the site should load, but it will display placeholder data.
 
 ### Getting fresh data
 
-All data is updated by pinging the route for that source. For instance, to update the Polymarket data, visit [localhost:5173/updatePolymarket](localhost:5173/updatePolymarket).
+All data is updated by pinging the route for that source. For instance, to update the 538 data, visit [localhost:5173/update538](localhost:5173/update538).
 
 To enable scraping The Economist, add this to your .env file:
 

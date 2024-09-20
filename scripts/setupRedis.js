@@ -38,15 +38,6 @@ export default async function setupRedis() {
       lastUpdate: new Date('2024-01-01T00:00:00.000Z'),
     });
 
-    await redis.hset('polymarket', {
-      repPercentage: 50,
-      demPercentage: 50,
-      outcome: 'tie',
-      formattedName: 'Polymarket',
-      url: 'https://polymarket.com/event/presidential-election-winner-2024',
-      lastUpdate: new Date('2024-01-01T00:00:00.000Z'),
-    });
-
     await redis.hset('raceToTheWH', {
       repPercentage: 50,
       demPercentage: 50,
@@ -80,6 +71,15 @@ export default async function setupRedis() {
       outcome: 'tie',
       formattedName: 'JHK Forecasts',
       url: 'https://projects.jhkforecasts.com/2024/president/',
+      lastUpdate: new Date('2024-01-01T00:00:00.000Z'),
+    });
+
+    await redis.hset('EBO', {
+      repPercentage: 53,
+      demPercentage: 46,
+      outcome: 'democrat',
+      formattedName: 'Election Betting Odds',
+      url: 'https://electionbettingodds.com/',
       lastUpdate: new Date('2024-01-01T00:00:00.000Z'),
     });
 

@@ -3,12 +3,12 @@ export type DemPercentage = number;
 export type RepPercentage = number;
 export type Source =
   | '538'
-  | 'polymarket'
   | 'raceToTheWH'
   | 'economist'
   | 'theHill'
   | 'nateSilver'
-  | 'JHK';
+  | 'JHK'
+  | 'EBO';
 
 export type Prediction = {
   outcome: Outcome;
@@ -30,7 +30,7 @@ export type Forecasts = {
   economist: Forecast;
   fiveThirtyEight: Forecast;
   nateSilver: Forecast;
-  polymarket: Forecast;
+  EBO: Forecast;
   theHill: Forecast;
   raceToTheWH: Forecast;
 };
