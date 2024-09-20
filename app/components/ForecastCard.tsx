@@ -22,7 +22,7 @@ function ForecastStat({
   }
   if (candidate === 'republican' && percentage > 50) {
     return (
-      <div className="text-2xl font-semibold underline decoration-red-400 decoration-4 underline-offset-4">
+      <div className="text-2xl font-semibold underline decoration-red-400 decoration-2 underline-offset-4">
         {percentage}%
       </div>
     );
@@ -30,7 +30,7 @@ function ForecastStat({
 
   if (candidate === 'democrat' && percentage > 50) {
     return (
-      <div className="text-2xl font-semibold underline decoration-blue-400 decoration-4 underline-offset-4">
+      <div className="text-2xl font-semibold underline decoration-blue-400 decoration-2 underline-offset-4">
         {percentage}%
       </div>
     );
