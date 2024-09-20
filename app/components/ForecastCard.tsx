@@ -1,4 +1,4 @@
-import type { Forecast } from '~/types';
+import type { DemPercentage, Forecast, RepPercentage } from '~/types';
 
 function CandidateBanner({ candidate }: { candidate: string }) {
   let candidateString;
@@ -15,28 +15,53 @@ function ForecastStat({
   percentage,
 }: {
   candidate: string;
-  percentage: number;
+  percentage: RepPercentage | DemPercentage;
 }) {
-  const getColorIntensity = (percentage: number) => {
-    if (percentage >= 65) return '500';
-    if (percentage >= 60) return '400';
-    return '300';
-  };
-
-  const getUnderlineColor = (candidate: string, percentage: number) => {
-    if (percentage < 55) return '';
-    const color = candidate === 'republican' ? 'red' : 'blue';
-    const intensity = getColorIntensity(percentage);
-    return `underline decoration-${color}-${intensity} underline-offset-4`;
-  };
-
-  return (
-    <div
-      className={`text-2xl font-semibold ${getUnderlineColor(candidate, percentage)}`}
-    >
-      {percentage}%
-    </div>
-  );
+  if (percentage < 55) {
+    return <div className="text-2xl font-semibold">{percentage}%</div>;
+  }
+  if (candidate === 'republican' && percentage >= 55 && percentage < 60) {
+    return (
+      <div className="text-2xl font-semibold underline decoration-red-300 underline-offset-4">
+        {percentage}%
+      </div>
+    );
+  }
+  if (candidate === 'republican' && percentage >= 60 && percentage < 65) {
+    return (
+      <div className="text-2xl font-semibold underline decoration-red-400 underline-offset-4">
+        {percentage}%
+      </div>
+    );
+  }
+  if (candidate === 'republican' && percentage >= 65) {
+    return (
+      <div className="text-2xl font-semibold underline decoration-red-500 underline-offset-4">
+        {percentage}%
+      </div>
+    );
+  }
+  if (candidate === 'democrat' && percentage >= 55 && percentage < 60) {
+    return (
+      <div className="text-2xl font-semibold underline decoration-blue-300 underline-offset-4">
+        {percentage}%
+      </div>
+    );
+  }
+  if (candidate === 'democrat' && percentage >= 60 && percentage < 65) {
+    return (
+      <div className="text-2xl font-semibold underline decoration-blue-400 underline-offset-4">
+        {percentage}%
+      </div>
+    );
+  }
+  if (candidate === 'democrat' && percentage >= 65) {
+    return (
+      <div className="text-2xl font-semibold underline decoration-blue-500 underline-offset-4">
+        {percentage}%
+      </div>
+    );
+  }
 }
 
 function ForecastData({ forecast }: { forecast: Forecast }) {
