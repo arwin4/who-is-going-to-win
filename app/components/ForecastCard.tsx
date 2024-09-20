@@ -17,47 +17,36 @@ function ForecastStat({
   candidate: string;
   percentage: RepPercentage | DemPercentage;
 }) {
-  if (percentage < 55) {
+  // TODO: shorten this. Keep running into issues where the underline won't show
+  // the blue/red color when using template literals.
+
+  if (percentage < 60) {
     return <div className="text-2xl font-semibold">{percentage}%</div>;
   }
-  if (candidate === 'republican' && percentage >= 55 && percentage < 60) {
+  if (candidate === 'republican' && percentage >= 60 && percentage < 70) {
     return (
-      <div className="text-2xl font-semibold underline decoration-red-300 underline-offset-4">
+      <div className="text-2xl font-semibold underline decoration-red-400 decoration-4 underline-offset-4">
         {percentage}%
       </div>
     );
   }
-  if (candidate === 'republican' && percentage >= 60 && percentage < 65) {
+  if (candidate === 'republican' && percentage >= 70) {
     return (
-      <div className="text-2xl font-semibold underline decoration-red-400 underline-offset-4">
+      <div className="text-2xl font-semibold underline decoration-red-500 decoration-4 underline-offset-4">
         {percentage}%
       </div>
     );
   }
-  if (candidate === 'republican' && percentage >= 65) {
+  if (candidate === 'democrat' && percentage >= 60 && percentage < 70) {
     return (
-      <div className="text-2xl font-semibold underline decoration-red-500 underline-offset-4">
+      <div className="text-2xl font-semibold underline decoration-blue-400 decoration-4 underline-offset-4">
         {percentage}%
       </div>
     );
   }
-  if (candidate === 'democrat' && percentage >= 55 && percentage < 60) {
+  if (candidate === 'democrat' && percentage >= 70) {
     return (
-      <div className="text-2xl font-semibold underline decoration-blue-300 underline-offset-4">
-        {percentage}%
-      </div>
-    );
-  }
-  if (candidate === 'democrat' && percentage >= 60 && percentage < 65) {
-    return (
-      <div className="text-2xl font-semibold underline decoration-blue-400 underline-offset-4">
-        {percentage}%
-      </div>
-    );
-  }
-  if (candidate === 'democrat' && percentage >= 65) {
-    return (
-      <div className="text-2xl font-semibold underline decoration-blue-500 underline-offset-4">
+      <div className="text-2xl font-semibold underline decoration-blue-500 decoration-4 underline-offset-4">
         {percentage}%
       </div>
     );
