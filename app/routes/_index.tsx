@@ -77,12 +77,14 @@ export default function Index() {
           {/* FIXME: find a way to forgo type assertion */}
           <ForecastCard forecast={theHill as Forecast} />
           <ForecastCard forecast={economist as Forecast} />
-          <ForecastCard forecast={fiveThirtyEight as Forecast} />
         </div>
         <div className="grid gap-4">
-          <ForecastCard forecast={raceToTheWH as Forecast} />
-          <ForecastCard forecast={nateSilver as Forecast} />
           <ForecastCard forecast={JHK as Forecast} />
+          <ForecastCard forecast={fiveThirtyEight as Forecast} />
+          <ForecastCard forecast={raceToTheWH as Forecast} />
+        </div>
+        <div className="grid gap-4">
+          <ForecastCard forecast={nateSilver as Forecast} />
           <ForecastCard forecast={polymarket as Forecast} />
         </div>
       </main>
