@@ -74,6 +74,15 @@ export default async function setupRedis() {
       lastUpdate: new Date('2024-01-01T00:00:00.000Z'),
     });
 
+    await redis.hset('JHK', {
+      repPercentage: 50,
+      demPercentage: 50,
+      outcome: 'tie',
+      formattedName: 'JHK Forecasts',
+      url: 'https://projects.jhkforecasts.com/2024/president/',
+      lastUpdate: new Date('2024-01-01T00:00:00.000Z'),
+    });
+
     console.log(
       'Finished setting up Redis db. Please manually confirm the creation of the above hashes in the Redis Data Browser/CLI.',
     );
