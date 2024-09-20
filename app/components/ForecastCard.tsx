@@ -95,7 +95,7 @@ function Disclaimer({ forecast }: { forecast: Forecast }) {
 export default function ForecastCard({ forecast }: { forecast: Forecast }) {
   return (
     <a href={forecast.url}>
-      <div className="grid border-collapse space-y-3 rounded bg-slate-300 p-5 text-center shadow-md outline outline-2 outline-slate-400/60 hover:outline-slate-400 dark:bg-slate-700">
+      <div className="grid border-collapse space-y-2 rounded bg-slate-300 p-4 text-center shadow-md outline outline-2 outline-slate-400/60 hover:outline-slate-400 dark:bg-slate-700">
         <h2 className="text-xl">{forecast.formattedName}</h2>
         <ForecastData forecast={forecast} />
         <Disclaimer forecast={forecast} />
