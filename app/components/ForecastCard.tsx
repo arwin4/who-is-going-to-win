@@ -12,36 +12,29 @@ function CandidateBanner({ candidate }: { candidate: string }) {
 
 function ForecastStat({
   candidate,
-  forecast,
+  percentage,
 }: {
   candidate: string;
-  forecast: Forecast;
+  percentage: number;
 }) {
-  const outcome = forecast.outcome;
-  const isFavored = candidate === outcome;
+  const getColorIntensity = (percentage: number) => {
+    if (percentage >= 65) return '500';
+    if (percentage >= 60) return '400';
+    return '300';
+  };
 
-  let outcomeColor;
-  if (outcome === 'republican') outcomeColor = 'bg-red-400';
-  if (outcome === 'democrat') outcomeColor = 'bg-blue-400';
-  if (outcome === 'tie' || outcome === 'unknown') outcomeColor = 'bg-gray-400';
-
-  const favoredColor = `-skew-y-1 ${outcomeColor} p-1`;
+  const getUnderlineColor = (candidate: string, percentage: number) => {
+    if (percentage < 55) return '';
+    const color = candidate === 'republican' ? 'red' : 'blue';
+    const intensity = getColorIntensity(percentage);
+    return `underline decoration-${color}-${intensity} underline-offset-4`;
+  };
 
   return (
-    <div className="grid grid-flow-col items-center gap-2 gap-y-1">
-      <div
-        className={
-          isFavored
-            ? `text-2xl font-semibold dark:text-gray-100 ${favoredColor}`
-            : `text-2xl font-semibold`
-        }
-      >
-        {candidate === 'democrat'
-          ? forecast.demPercentage
-          : forecast.repPercentage}
-        %
-      </div>
-      <CandidateBanner candidate={candidate}></CandidateBanner>
+    <div
+      className={`text-2xl font-semibold ${getUnderlineColor(candidate, percentage)}`}
+    >
+      {percentage}%
     </div>
   );
 }
@@ -53,10 +46,18 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
 
   return (
     <>
-      <div className="grid grid-flow-col items-center justify-center gap-4">
-        <ForecastStat candidate="democrat" forecast={forecast} />
+      <div className="grid grid-flow-col items-center justify-center gap-2">
+        <ForecastStat
+          candidate="democrat"
+          percentage={forecast.demPercentage}
+        />
+        <CandidateBanner candidate="democrat" />
         <div>—</div>
-        <ForecastStat candidate="republican" forecast={forecast} />
+        <ForecastStat
+          candidate="republican"
+          percentage={forecast.repPercentage}
+        />
+        <CandidateBanner candidate="republican" />
       </div>
       <div className="mt-1 text-sm opacity-80">
         {forecast.lastUpdateText} ago
