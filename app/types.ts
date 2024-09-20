@@ -7,7 +7,8 @@ export type Source =
   | 'raceToTheWH'
   | 'economist'
   | 'theHill'
-  | 'nateSilver';
+  | 'nateSilver'
+  | 'JHK';
 
 export type Prediction = {
   outcome: Outcome;
