@@ -72,7 +72,7 @@ Please note that Analytics and Speed Insights, which are subject to usage limits
 For sources that can't be scraped, or during development, you might want to manually enter data. To do this, enter the Upstash CLI and use the following command:
 
 ```
-hset sourceName fieldName percentage
+hset sourceName fieldName value
 ```
 
 For example:
