@@ -36,6 +36,12 @@ export default function Explanation(): React.JSX.Element {
             .
           </li>
         </ul>
+        <a
+          className="font-semibold underline hover:text-gray-500 hover:decoration-gray-500"
+          href="https://github.com/arwin4/who-is-going-to-win"
+        >
+          View on GitHub
+        </a>
       </main>
       <Link
         className="mb-4 text-lg font-semibold underline hover:text-gray-500 hover:decoration-gray-500"
