@@ -25,6 +25,7 @@ export async function loader() {
       await redis.hgetall<Forecast>('raceToTheWH'),
       await redis.hgetall<Forecast>('theHill'),
       await redis.hgetall<Forecast>('nateSilver'),
+      await redis.hgetall<Forecast>('JHK'),
     ]);
 
     forecasts.map((forecast) => {
@@ -48,6 +49,7 @@ export default function Index() {
     raceToTheWH,
     theHill,
     nateSilver,
+    JHK,
   ] = useLoaderData<typeof loader>();
 
   return (
@@ -80,6 +82,7 @@ export default function Index() {
         <div className="grid gap-4">
           <ForecastCard forecast={raceToTheWH as Forecast} />
           <ForecastCard forecast={nateSilver as Forecast} />
+          <ForecastCard forecast={JHK as Forecast} />
           <ForecastCard forecast={polymarket as Forecast} />
         </div>
       </main>
