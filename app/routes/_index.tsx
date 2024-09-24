@@ -35,6 +35,7 @@ export async function loader() {
 
     return forecasts;
   } catch (err) {
+    console.error(err);
     throw new Response('Unable to fetch (all) forecasts from database', {
       status: 500,
     });

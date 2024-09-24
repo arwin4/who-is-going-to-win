@@ -20,8 +20,9 @@ export const loader = async ({ request }: { request: Request }) => {
     await updatePrediction(source, scraper);
     // TODO: change to proper response and status code
     return true;
-  } catch (error) {
+  } catch (err) {
     console.error(`Failed to update ${source}`);
+    console.error(err);
     return false;
   }
 };

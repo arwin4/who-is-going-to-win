@@ -13,7 +13,8 @@ export default async function updatePrediction(
       ...prediction,
       lastUpdate: new Date(),
     });
-  } catch (error) {
+  } catch (err) {
     console.error(`Failed to update ${source}`);
+    console.error(err);
   }
 }

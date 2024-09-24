@@ -46,6 +46,7 @@ const scrapeEBO: ScrapingFunction = async () => {
     };
   } catch (err) {
     console.error('Unable to determine EBO prediction');
+    console.error(err);
     return {
       outcome: 'unknown',
       repPercentage: NaN,

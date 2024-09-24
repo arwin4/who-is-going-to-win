@@ -38,6 +38,7 @@ export default async function scrapeFiveThirtyEight(): Promise<Prediction> {
     };
   } catch (err) {
     console.error('Unable to determine 538 prediction');
+    console.error(err);
     return {
       outcome: 'unknown',
       repPercentage: NaN,

@@ -43,6 +43,7 @@ const scrape538: ScrapingFunction = async () => {
     };
   } catch (err) {
     console.error('Unable to determine 538 prediction');
+    console.error(err);
     return {
       outcome: 'unknown',
       repPercentage: NaN,

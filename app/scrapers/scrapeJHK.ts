@@ -42,7 +42,8 @@ async function getPredictions(): Promise<Predictions> {
           );
 
           resolve({ demPercentage, repPercentage });
-        } catch (error) {
+        } catch (err) {
+          console.error(err);
           reject();
         }
       },

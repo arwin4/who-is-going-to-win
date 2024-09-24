@@ -50,6 +50,7 @@ const scrapeTheHill: ScrapingFunction = async () => {
     };
   } catch (err) {
     console.error('Unable to determine The Hill prediction');
+    console.error(err);
     return {
       outcome: 'unknown',
       repPercentage: NaN,
