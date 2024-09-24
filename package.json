@@ -2,6 +2,11 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ]
+  },
   "scripts": {
     "dev": "remix vite:dev",
     "build": "remix vite:build",
