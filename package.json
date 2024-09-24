@@ -3,6 +3,7 @@
   "sideEffects": false,
   "type": "module",
   "prettier": {
+    "singleQuote": true,
     "plugins": [
       "prettier-plugin-tailwindcss"
     ]
