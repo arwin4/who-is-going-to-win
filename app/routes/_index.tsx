@@ -72,7 +72,7 @@ export default function Index() {
           />
         </Link>
       </div>
-      <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col ">
+      <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col">
         <div className="grid gap-4">
           {/* FIXME: find a way to forgo type assertion */}
           <ForecastCard forecast={theHill as Forecast} />
