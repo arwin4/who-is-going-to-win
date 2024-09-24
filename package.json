@@ -10,9 +10,10 @@
   },
   "scripts": {
     "dev": "remix vite:dev",
-    "build": "npm run typecheck && npm run lint && remix vite:build",
+    "build": "npm run prettier && npm run typecheck && npm run lint && remix vite:build",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
+    "prettier": "prettier . --check",
     "lint": "eslint ./app/**",
     "setup-redis": "node ./scripts/setupRedis.js"
   },
