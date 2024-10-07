@@ -37,10 +37,8 @@ function ForecastStat({
   }
 }
 
-function LastUpdate({ forecast }: { forecast: Forecast }) {
-  return (
-    <div className="mt-1 text-sm opacity-80">{forecast.lastUpdateText} ago</div>
-  );
+function LastUpdate() {
+  return <div className="mt-1 text-sm opacity-80">Final prediction</div>;
 }
 
 function ForecastData({ forecast }: { forecast: Forecast }) {
@@ -63,7 +61,7 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
         />
         <CandidateBanner candidate="republican" />
       </div>
-      <LastUpdate forecast={forecast} />
+      <LastUpdate />
     </>
   );
 }

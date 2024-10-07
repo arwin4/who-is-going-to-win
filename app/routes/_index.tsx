@@ -55,7 +55,7 @@ export default function Index() {
 
   return (
     <>
-      <div className="grid border-yellow-400 p-4 text-center font-sans">
+      <div className="grid justify-items-center border-yellow-400 p-4 text-center align-middle font-sans">
         <h1 className="text-[clamp(1.5rem,5vw,2rem)] font-semibold">
           Who Is Going To Win?
         </h1>
@@ -72,6 +72,9 @@ export default function Index() {
             alt="Information"
           />
         </Link>
+        <div className="grid grid-flow-col rounded-b-lg bg-slate-300 px-4 py-1 font-semibold dark:bg-slate-700">
+          All forecasts final
+        </div>
       </div>
       <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col">
         <div className="grid gap-4">
