@@ -37,6 +37,12 @@ function ForecastStat({
   }
 }
 
+function LastUpdate({ forecast }: { forecast: Forecast }) {
+  return (
+    <div className="mt-1 text-sm opacity-80">{forecast.lastUpdateText} ago</div>
+  );
+}
+
 function ForecastData({ forecast }: { forecast: Forecast }) {
   if (forecast.outcome === 'unknown') {
     return <div className="">There was an error getting this forecast. </div>;
@@ -57,9 +63,7 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
         />
         <CandidateBanner candidate="republican" />
       </div>
-      <div className="mt-1 text-sm opacity-80">
-        {forecast.lastUpdateText} ago
-      </div>
+      <LastUpdate forecast={forecast} />
     </>
   );
 }
