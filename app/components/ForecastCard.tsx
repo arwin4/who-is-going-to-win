@@ -13,22 +13,21 @@ function CandidateBanner({ candidate }: { candidate: string }) {
 function ForecastStat({
   candidate,
   percentage,
+  hasAdvantage,
 }: {
   candidate: string;
   percentage: RepPercentage | DemPercentage;
+  hasAdvantage: boolean;
 }) {
-  if (percentage <= 50) {
+  if (!hasAdvantage) {
     return <div className="text-2xl font-semibold">{percentage}%</div>;
-  }
-  if (candidate === 'republican' && percentage > 50) {
+  } else if (candidate === 'republican') {
     return (
       <div className="text-2xl font-semibold underline decoration-red-400 decoration-2 underline-offset-4">
         {percentage}%
       </div>
     );
-  }
-
-  if (candidate === 'democrat' && percentage > 50) {
+  } else if (candidate === 'democrat') {
     return (
       <div className="text-2xl font-semibold underline decoration-blue-400 decoration-2 underline-offset-4">
         {percentage}%
@@ -48,12 +47,14 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
         <ForecastStat
           candidate="democrat"
           percentage={forecast.demPercentage}
+          hasAdvantage={forecast.demPercentage > forecast.repPercentage}
         />
         <CandidateBanner candidate="democrat" />
         <div>—</div>
         <ForecastStat
           candidate="republican"
           percentage={forecast.repPercentage}
+          hasAdvantage={forecast.repPercentage > forecast.demPercentage}
         />
         <CandidateBanner candidate="republican" />
       </div>
