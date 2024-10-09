@@ -37,7 +37,11 @@ function ForecastStat({
 }
 
 function LastUpdate() {
-  return <div className="mt-1 text-sm opacity-80">Final prediction</div>;
+  return (
+    <div className="mt-1 text-sm font-semibold opacity-80">
+      Final prediction
+    </div>
+  );
 }
 
 function ForecastData({ forecast }: { forecast: Forecast }) {

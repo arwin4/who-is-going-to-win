@@ -72,7 +72,7 @@ export default function Index() {
             alt="Information"
           />
         </Link>
-        <div className="grid grid-flow-col rounded-b-lg bg-slate-300 px-4 py-1 font-semibold dark:bg-slate-700">
+        <div className="grid grid-flow-col rounded-b-lg border-2 border-t-0 border-slate-400 bg-slate-300 px-4 py-1 font-semibold dark:bg-slate-700">
           All forecasts final
         </div>
       </div>
