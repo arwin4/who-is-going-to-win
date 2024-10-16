@@ -94,7 +94,7 @@ export default function Index() {
           className="underline underline-offset-2 hover:decoration-slate-400"
           href="https://whoisgoingtowin.substack.com/p/subscribe-to-be-notified-when-who"
         >
-          Get a notification
+          Get notified
         </a>{' '}
         when <em>Who Is Going To Win?</em> returns next election season.
       </footer>
