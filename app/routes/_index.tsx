@@ -89,6 +89,15 @@ export default function Index() {
           <ForecastCard forecast={EBO as Forecast} />
         </div>
       </main>
+      <footer className="m-4 mt-0 text-center text-xs">
+        <a
+          className="underline underline-offset-2 hover:decoration-slate-400"
+          href="https://whoisgoingtowin.substack.com/p/subscribe-to-be-notified-when-who"
+        >
+          Get a notification
+        </a>{' '}
+        when <em>Who Is Going To Win?</em> returns next election season.
+      </footer>
     </>
   );
 }
