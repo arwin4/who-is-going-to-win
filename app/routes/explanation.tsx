@@ -6,7 +6,7 @@ export const config = { runtime: 'edge' };
 export default function Explanation(): React.JSX.Element {
   return (
     <>
-      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded bg-slate-300 p-5 text-center text-gray-600 shadow-md dark:bg-slate-700 dark:text-gray-300">
+      <main className="m-4 mx-6 grid max-w-xl gap-4 rounded p-5 text-gray-600 dark:text-gray-300">
         <div>
           This site displays an overview of the current forecast models for the
           2024 US presidential election,{' '}
@@ -37,7 +37,7 @@ export default function Explanation(): React.JSX.Element {
           </li>
         </ul>
         <a
-          className="font-semibold underline hover:text-gray-500 hover:decoration-gray-500"
+          className="text-center font-semibold underline hover:text-gray-500 hover:decoration-gray-500"
           href="https://github.com/arwin4/who-is-going-to-win"
         >
           View on GitHub

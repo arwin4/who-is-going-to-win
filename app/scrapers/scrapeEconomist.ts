@@ -8,10 +8,7 @@ import { chromium as playwright } from 'playwright-core';
 import chromium from '@sparticuz/chromium';
 import { getPercentageFromString } from '../utils/scrapers/getPercentageFromString';
 
-async function getFullPredictionString() {
-  const username = process.env.ECONOMIST_USERNAME as string;
-  const password = process.env.ECONOMIST_PASSWORD as string;
-
+async function getPartyPredictionStrings() {
   console.log('Preparing to launch playwright browser');
 
   const browser = await playwright.launch({
@@ -26,40 +23,25 @@ async function getFullPredictionString() {
   await page.goto(
     'https://www.economist.com/interactive/us-2024-election/prediction-model/president',
   );
-
-  console.log('Navigated to page');
-
-  const logInBtn = page
-    .locator('[data-test-id="Masthead"]')
-    .getByRole('link', { name: 'Log in' });
-
-  // Use dispatchEvent to bypass possible cookie consent iframe
-  await logInBtn.dispatchEvent('click');
-
-  console.log('Clicked on Login button');
-
-  await page.locator('#input-6').fill(username);
-  await page.locator('#input-8').fill(password);
-  await page.locator('#input-8').press('Enter');
-
-  console.log('Submitted login form');
-
-  await page.locator('.svelte-h0zoai').isVisible();
-
-  console.log('Located target element');
-
+  await page.locator('.top-forecast-table').isVisible();
   const fullPredictionString = await page
-    .getByText('in 100')
-    .filter({ hasText: /^.{11}$/ }) // Assume chance% has two characters
-    .first()
-    .textContent();
+    .locator('.top-forecast-table')
+    .allInnerTexts();
 
-  console.log(fullPredictionString);
+  const splitPredictionStrings = fullPredictionString[0].split('\n');
+  const repPredictionString = splitPredictionStrings.find((string) =>
+    string.includes('Trump'),
+  );
+  const demPredictionString = splitPredictionStrings.find((string) =>
+    string.includes('Harris'),
+  );
+  if (!repPredictionString) throw new Error('Unable to find rep prediction');
+  if (!demPredictionString) throw new Error('Unable to find dem prediction');
 
   // We don't close the browser on Vercel, since this is slow and not necessary
   // await browser.close();
 
-  return fullPredictionString;
+  return { repPredictionString, demPredictionString };
 }
 
 /**
@@ -68,60 +50,26 @@ async function getFullPredictionString() {
  */
 const scrapeEconomist: ScrapingFunction = async () => {
   try {
-    const fullPredictionString = await getFullPredictionString();
+    const { repPredictionString, demPredictionString } =
+      await getPartyPredictionStrings();
 
-    if (!fullPredictionString) throw new Error();
+    if (!repPredictionString || !demPredictionString) throw new Error();
 
     let outcome: Outcome;
 
-    const parsedPercentage = getPercentageFromString(fullPredictionString);
-    if (parsedPercentage === 50) {
-      outcome = 'tie';
-      return {
-        outcome,
-        repPercentage: 50,
-        demPercentage: 50,
-      };
-    }
+    const repPercentage: RepPercentage =
+      getPercentageFromString(repPredictionString);
+    const demPercentage: DemPercentage =
+      getPercentageFromString(demPredictionString);
 
-    // The string may concern the Dem or the Rep, so determine whose it is
-    let candidate: 'democrat' | 'republican';
-    const firstLetterOfPredictionString = fullPredictionString.charAt(0);
-    if (firstLetterOfPredictionString === 'D') {
-      candidate = 'democrat';
-    } else if (firstLetterOfPredictionString === 'R') {
-      candidate = 'republican';
+    if (repPercentage === demPercentage) {
+      outcome = 'tie';
+    } else if (repPercentage > demPercentage) {
+      outcome = 'republican';
+    } else if (repPercentage < demPercentage) {
+      outcome = 'democrat';
     } else {
       throw new Error();
-    }
-
-    let demPercentage: DemPercentage;
-    let repPercentage: RepPercentage;
-
-    if (parsedPercentage < 50) {
-      if (candidate === 'democrat') {
-        // D 40
-        outcome = 'republican';
-        repPercentage = 100 - parsedPercentage;
-        demPercentage = parsedPercentage;
-      } else {
-        // R 40
-        outcome = 'democrat';
-        demPercentage = 100 - parsedPercentage;
-        repPercentage = parsedPercentage;
-      }
-    } else {
-      if (candidate === 'democrat') {
-        // D 60
-        outcome = 'democrat';
-        demPercentage = parsedPercentage;
-        repPercentage = 100 - parsedPercentage;
-      } else {
-        // R 60
-        outcome = 'republican';
-        repPercentage = parsedPercentage;
-        demPercentage = 100 - parsedPercentage;
-      }
     }
 
     return {
