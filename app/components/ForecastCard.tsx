@@ -11,29 +11,11 @@ function CandidateBanner({ candidate }: { candidate: string }) {
 }
 
 function ForecastStat({
-  candidate,
   percentage,
-  hasAdvantage,
 }: {
-  candidate: string;
   percentage: RepPercentage | DemPercentage;
-  hasAdvantage: boolean;
 }) {
-  if (!hasAdvantage) {
-    return <div className="text-2xl font-semibold">{percentage}%</div>;
-  } else if (candidate === 'republican') {
-    return (
-      <div className="text-2xl font-semibold underline decoration-red-400 decoration-2 underline-offset-4">
-        {percentage}%
-      </div>
-    );
-  } else if (candidate === 'democrat') {
-    return (
-      <div className="text-2xl font-semibold underline decoration-blue-400 decoration-2 underline-offset-4">
-        {percentage}%
-      </div>
-    );
-  }
+  return <div className="text-2xl font-semibold">{percentage}%</div>;
 }
 
 function ForecastData({
@@ -50,18 +32,10 @@ function ForecastData({
   return (
     <>
       <div className="grid grid-flow-col items-center justify-center gap-2">
-        <ForecastStat
-          candidate="democrat"
-          percentage={forecast.demPercentage}
-          hasAdvantage={forecast.demPercentage > forecast.repPercentage}
-        />
+        <ForecastStat percentage={forecast.demPercentage} />
         <CandidateBanner candidate="democrat" />
         <div>—</div>
-        <ForecastStat
-          candidate="republican"
-          percentage={forecast.repPercentage}
-          hasAdvantage={forecast.repPercentage > forecast.demPercentage}
-        />
+        <ForecastStat percentage={forecast.repPercentage} />
         <CandidateBanner candidate="republican" />
       </div>
       {final ? (
