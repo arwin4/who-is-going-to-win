@@ -36,15 +36,13 @@ function ForecastStat({
   }
 }
 
-function LastUpdate() {
-  return (
-    <div className="mt-1 text-sm font-semibold opacity-80">
-      Final probabilities
-    </div>
-  );
-}
-
-function ForecastData({ forecast }: { forecast: Forecast }) {
+function ForecastData({
+  forecast,
+  final,
+}: {
+  forecast: Forecast;
+  final: boolean;
+}) {
   if (forecast.outcome === 'unknown') {
     return <div className="">There was an error getting this forecast. </div>;
   }
@@ -66,7 +64,15 @@ function ForecastData({ forecast }: { forecast: Forecast }) {
         />
         <CandidateBanner candidate="republican" />
       </div>
-      <LastUpdate />
+      {final ? (
+        <div className="mt-1 text-sm font-semibold italic tracking-wide opacity-80">
+          Final
+        </div>
+      ) : (
+        <div className="mt-1 text-sm opacity-80">
+          {forecast.lastUpdateText} ago
+        </div>
+      )}
     </>
   );
 }
@@ -83,12 +89,18 @@ function Disclaimer({ forecast }: { forecast: Forecast }) {
   );
 }
 
-export default function ForecastCard({ forecast }: { forecast: Forecast }) {
+export default function ForecastCard({
+  forecast,
+  final,
+}: {
+  forecast: Forecast;
+  final?: boolean;
+}) {
   return (
     <a href={forecast.url}>
       <div className="grid border-collapse space-y-2 rounded bg-slate-300 p-4 text-center shadow-md outline outline-2 outline-slate-400/60 hover:outline-slate-400 dark:bg-slate-700">
         <h2 className="text-xl">{forecast.formattedName}</h2>
-        <ForecastData forecast={forecast} />
+        <ForecastData forecast={forecast} final={Boolean(final)} />
         <Disclaimer forecast={forecast} />
       </div>
     </a>
