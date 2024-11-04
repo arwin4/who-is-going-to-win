@@ -8,7 +8,8 @@ export type Source =
   | 'theHill'
   | 'nateSilver'
   | 'JHK'
-  | 'EBO';
+  | 'EBO'
+  | 'splitTicket';
 
 export type Prediction = {
   outcome: Outcome;
@@ -36,3 +37,5 @@ export type Forecasts = {
 };
 
 export type ScrapingFunction = () => Promise<Prediction>;
+
+export type ocrResponse = Array<{ text: string }>;

@@ -21,7 +21,7 @@ export async function loader() {
     const forecasts = await Promise.all([
       await redis.hgetall<Forecast>('538'),
       await redis.hgetall<Forecast>('economist'),
-      await redis.hgetall<Forecast>('EBO'),
+      await redis.hgetall<Forecast>('splitTicket'),
       await redis.hgetall<Forecast>('raceToTheWH'),
       await redis.hgetall<Forecast>('theHill'),
       await redis.hgetall<Forecast>('nateSilver'),
@@ -46,7 +46,7 @@ export default function Index() {
   const [
     fiveThirtyEight,
     economist,
-    EBO,
+    splitTicket,
     raceToTheWH,
     theHill,
     nateSilver,
@@ -88,8 +88,8 @@ export default function Index() {
           <ForecastCard forecast={raceToTheWH as Forecast} />
         </div>
         <div className="grid gap-4">
+          <ForecastCard forecast={splitTicket as Forecast} />
           <ForecastCard forecast={nateSilver as Forecast} />
-          <ForecastCard forecast={EBO as Forecast} />
         </div>
       </main>
       <footer className="m-4 mt-0 text-center text-xs">
