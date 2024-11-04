@@ -65,7 +65,7 @@ export default function Index() {
           className="grid border-collapse grid-flow-col rounded bg-slate-300 px-4 py-1 shadow-md outline outline-1 outline-slate-400/60 hover:bg-slate-400/50 hover:outline-slate-400 dark:bg-slate-700"
           unstable_viewTransition
         >
-          Predictions &mdash; not polling averages
+          Probabilities &mdash; not polling averages
           <img
             src="assets/info-icon.svg"
             className="w-7 self-center pl-2"
