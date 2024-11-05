@@ -84,7 +84,7 @@ export default function Index() {
         </div>
         <div className="grid gap-4">
           <ForecastCard forecast={JHK as Forecast} final />
-          <ForecastCard forecast={fiveThirtyEight as Forecast} />
+          <ForecastCard forecast={fiveThirtyEight as Forecast} final />
           <ForecastCard forecast={raceToTheWH as Forecast} />
         </div>
         <div className="grid gap-4">
