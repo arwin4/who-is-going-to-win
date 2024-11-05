@@ -80,7 +80,7 @@ export default function Index() {
         <div className="grid gap-4">
           {/* FIXME: find a way to forgo type assertion */}
           <ForecastCard forecast={theHill as Forecast} />
-          <ForecastCard forecast={economist as Forecast} />
+          <ForecastCard forecast={economist as Forecast} final />
         </div>
         <div className="grid gap-4">
           <ForecastCard forecast={JHK as Forecast} final />
