@@ -88,8 +88,8 @@ export default function Index() {
           <ForecastCard forecast={raceToTheWH as Forecast} />
         </div>
         <div className="grid gap-4">
-          <ForecastCard forecast={splitTicket as Forecast} />
-          <ForecastCard forecast={nateSilver as Forecast} />
+          <ForecastCard forecast={splitTicket as Forecast} final />
+          <ForecastCard forecast={nateSilver as Forecast} final />
         </div>
       </main>
       <footer className="m-4 mt-0 text-center text-xs">
