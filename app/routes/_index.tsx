@@ -72,24 +72,24 @@ export default function Index() {
             alt="Information"
           />
         </Link>
-        {/* <div className="grid grid-flow-col rounded-b-lg border border-t-0 border-slate-400 bg-slate-300 px-4 py-1 font-semibold dark:bg-slate-700">
+        <div className="grid grid-flow-col rounded-b-lg border border-t-0 border-slate-400 bg-slate-300 px-4 py-1 font-semibold dark:bg-slate-700">
           All forecasts final
-        </div> */}
+        </div>
       </div>
       <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col">
         <div className="grid gap-4">
           {/* FIXME: find a way to forgo type assertion */}
           <ForecastCard forecast={theHill as Forecast} />
-          <ForecastCard forecast={economist as Forecast} final />
+          <ForecastCard forecast={economist as Forecast} />
         </div>
         <div className="grid gap-4">
-          <ForecastCard forecast={JHK as Forecast} final />
-          <ForecastCard forecast={fiveThirtyEight as Forecast} final />
+          <ForecastCard forecast={JHK as Forecast} />
+          <ForecastCard forecast={fiveThirtyEight as Forecast} />
           <ForecastCard forecast={raceToTheWH as Forecast} />
         </div>
         <div className="grid gap-4">
-          <ForecastCard forecast={splitTicket as Forecast} final />
-          <ForecastCard forecast={nateSilver as Forecast} final />
+          <ForecastCard forecast={splitTicket as Forecast} />
+          <ForecastCard forecast={nateSilver as Forecast} />
         </div>
       </main>
       <footer className="m-4 mt-0 text-center text-xs">
