@@ -72,9 +72,9 @@ export default function Index() {
             alt="Information"
           />
         </Link>
-        <div className="grid grid-flow-col rounded-b-lg border border-t-0 border-slate-400 bg-slate-300 px-4 py-1 font-semibold dark:bg-slate-700">
-          All forecasts final
-        </div>
+        <p className="grid rounded-b-lg border border-t-0 border-slate-400 bg-slate-300 px-4 py-1 dark:bg-slate-700">
+          See you next election!
+        </p>
       </div>
       <main className="m-4 mt-0 grid items-center gap-4 md:grid-flow-col">
         <div className="grid gap-4">
@@ -92,15 +92,6 @@ export default function Index() {
           <ForecastCard forecast={nateSilver as Forecast} />
         </div>
       </main>
-      <footer className="m-4 mt-0 text-center text-xs">
-        <a
-          className="underline underline-offset-2 hover:decoration-slate-400"
-          href="https://whoisgoingtowin.substack.com/p/subscribe-to-be-notified-when-who"
-        >
-          Get notified
-        </a>{' '}
-        when <em>Who Is Going To Win?</em> returns next election season.
-      </footer>
     </>
   );
 }
