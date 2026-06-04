@@ -1,3 +1,6 @@
+>### Archive notice
+>This version of _Who Is Going To Win?_ is no longer maintained and lacks critical dependency updates. If the site returns, it is likely to be rewritten.
+
 # Who Is Going To Win?
 
 [_Who Is Going To Win?_](https://www.whoisgoingto.win/) is a Remix app that displays the predictions of several election forecast models for the 2024 US Presidential Election. It is configured to run on Vercel using edge functions for the frontend and serverless functions for data scraping.
